@@ -1,7 +1,14 @@
- body {
+body {
     background-color: #0e688e;
-    background-image: url("assets/background.png");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+    background:
+        url("assets/noise.png") left top / 80rem 45rem repeat fixed,
+        url("assets/stars.png") left top / 4rem 4rem repeat fixed,
+        url("assets/background.png") left top / 100% 100% no-repeat fixed;
+    background-blend-mode: color-dodge, screen, normal;
+    animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+    from { background-position: 0 0, left top, left top; }
+    to { background-position: 100% 100%, left top, left top; }
 }
