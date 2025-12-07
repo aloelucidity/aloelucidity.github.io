@@ -6,10 +6,82 @@ body {
         url("assets/stars.png") left top / 4rem 4rem repeat fixed,
         url("assets/background.png") left top / 100% 100% no-repeat fixed;
     background-blend-mode: color-dodge, screen, normal;
-    animation: scroll 30s linear infinite;
+    animation: scroll 120s linear infinite;
 }
 
 @keyframes scroll {
-    from { background-position: 0 0, left top, left top; }
-    to { background-position: 100% 100%, left top, left top; }
+    from { background-position: left top, bottom right, left top; }
+    to { background-position: 1000% 1000%, left top, left top; }
+}
+
+/* Logo */
+.logo {
+    margin: auto;
+    display: block;
+
+    height: 12rem;
+    filter: drop-shadow(0.15rem 0.3rem 0.05rem #00005240);
+
+    background-image: radial-gradient(#00004030 0%, #00000000 50%);
+    margin: 1.5rem auto -4.5rem auto;
+    padding-bottom: 6rem;
+
+    pointer-events: none;
+}
+
+/* Navigation Bar */
+ul {
+    display: flex;
+    margin: -0.5rem;
+    justify-content: flex-end;
+
+    background-color: #808080;
+    background: 
+        repeating-linear-gradient(135deg, #ffffff20, #ffffff20 1rem, #65c2c510 1rem, #65c2c510 2rem),
+        linear-gradient(#e2fded 0%, #9cebb4 45%, #61d684 50%, #607fcb 85%);
+    background-size: cover;
+    background-blend-mode: multiply;
+
+    outline-style: groove;
+    outline-width: 0.25rem;
+    outline-offset: -0.1rem;
+    outline-color: #ffffff30;
+
+    box-shadow: 0.1rem 0.1rem 0.5rem #ffffff inset, 0rem 0.33rem 1rem #7e77d480;
+}
+
+ul p {
+    margin-right: auto;
+}
+
+ul li  {
+    /*
+    background-color: #808080;
+    background: repeating-radial-gradient(farthest-side at 50% 0%, #c0c0c030, #c0c0c030 2rem, #86868630 2rem, #86868630 3rem);
+    background-size: cover;
+    background-blend-mode: multiply;
+    */
+
+    display: inline-block;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+/* Content */
+.content {
+    background-color: #000000ff;
+    background:
+        linear-gradient(#cce4ef 0%, #e4eef1 100%),
+        repeating-linear-gradient(#ffffff40, #ffffff40 1rem, #aacccc10 1rem, #aacccc10 1.375rem);
+    background-blend-mode: multiply;
+
+    outline-style: outset;
+    outline-width: 0.25rem;
+    outline-color: #ffffff40;
+    outline-offset: -0.1rem;
+    
+    max-width: 60%;
+    min-height: 40rem;
+    margin: auto;
+
+    padding: 0 0.5rem 0 0.5rem;
 }
