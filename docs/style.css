@@ -33,27 +33,26 @@ body {
     filter: drop-shadow(0.15rem 0.3rem 0.05rem #00005240);
 
     background-image: radial-gradient(#00004030 0%, #00000000 50%);
-    margin: 1.5rem auto -4.5rem auto;
-    padding-bottom: 6rem;
+    background-position-y: 2rem;
+    background-repeat: no-repeat;
 
-    pointer-events: none;
+    margin: 1.5rem auto 0 auto;
+    padding-bottom: 1rem;
+
+    user-select: none;
 }
 
 /* Navigation Bar */
 ul {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    margin: 0 -0.5rem 0 -0.5rem;
+    list-style-type: none;
+    padding-inline: 0;
 
-    background-color: #808080;
-    background: 
-        repeating-linear-gradient(135deg, #ffffff20, #ffffff20 1rem, #65c2c510 1rem, #65c2c510 2rem),
-        linear-gradient(#e2fded 0%, #9cebb4 45%, #61d684 50%, #607fcb 85%);
-    background-size: cover;
-    background-blend-mode: multiply;
+    color: transparent;
+    background-color: transparent;
 
-    outline-style: groove;
+    outline-style: outset;
     outline-width: 0.25rem;
     outline-offset: -0.1rem;
     outline-color: #ffffff30;
@@ -61,23 +60,101 @@ ul {
     box-shadow: 0.1rem 0.1rem 0.5rem #ffffff inset, 0rem 0.33rem 1rem #7e77d480;
 }
 
-ul p {
-    margin: 0 auto 0 -1rem;
+ul li {
+    flex-grow: 1;
 }
 
-ul li  {
-    background-color: #808080;
-    background: repeating-radial-gradient(farthest-side at 50% 0%, #c0c0c030, #c0c0c030 2rem, #86868630 2rem, #86868630 3rem);
-    background-size: 100%;
-    background-blend-mode: multiply;
-
+/* Navigation Bar Buttons */
+ul li a  {
+    /* Sizing */
     display: block;
     padding: 0.5rem 2rem 0.5rem 2rem;
-    size: 100%;
+    white-space: nowrap;
+    flex-grow: 1;
 
+    /* Background */
+    background-color: #808080;
+    background: 
+        repeating-linear-gradient(135deg, #ffffff20, #ffffff20 1rem, #65c2c510 1rem, #65c2c510 2rem),
+        linear-gradient(#e2fded 0%, #9cebb4 45%, #61d684 50%, #607fcb 85%),
+        repeating-radial-gradient(farthest-side at 50% 0%, #ffffff00, #ffffff00 2rem, #61bfc920 2rem, #61bfc920 3rem);
+    background-blend-mode: multiply;
+
+    outline-style: groove;
+    outline-width: 0.25rem;
+    outline-color: #ffffff40;
+    outline-offset: -0.1rem;
+
+    /* Text */
     font-family: 'Fontdiner Swanky';
     font-weight: 400;
     font-size: 1.5rem;
+
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 
+    /* Outline */
+    -0.1rem -0.1rem 0 #3cc6a3,
+     0   -0.1rem 0 #3cc6a3,
+     0.1rem -0.1rem 0 #3cc6a3,
+     0.1rem  0   0 #3cc6a3,
+     0.1rem  0.1rem 0 #3cc6a3,
+     0    0.1rem 0 #3cc6a3,
+    -0.1rem  0.1rem 0 #3cc6a3,
+    -0.1rem  0   0 #3cc6a3,
+    /* Other */
+    0 0 1rem #298ba3, 0.2rem 0.25rem 0.05rem #7e77d4a0;
+
+    color: white;
+    user-select: none;
+
+    transition: all 0.3s ease;
+}
+
+ul li a:hover {
+    text-shadow: 
+    /* Outline */
+    -0.1rem -0.1rem 0.2rem #3cc6a3,
+     0   -0.1rem 0.2rem #3cc6a3,
+     0.1rem -0.1rem 0.2rem #3cc6a3,
+     0.1rem  0   0.2rem #3cc6a3,
+     0.1rem  0.1rem 0.2rem #3cc6a3,
+     0    0.1rem 0.2rem #3cc6a3,
+    -0.1rem  0.1rem 0.2rem #3cc6a3,
+    -0.1rem  0   0.2rem #3cc6a3,
+    /* Other */
+    0 0 3rem #298ba3, 0.2rem 0.25rem 0.15rem #7e77d4a0;
+    
+    padding: 0.38rem 1.75rem 0.38rem 1.75rem;
+    font-size: 1.65rem;
+}
+
+ul li a:active {
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    font-size: 1.5rem;
+
+    color: #9cebb4;
+    transition: all 0.05s ease;
+}
+
+.current {
+    background: 
+        repeating-linear-gradient(135deg, #ffffff20, #ffffff20 1rem, #65c2c510 1rem, #65c2c510 2rem),
+        linear-gradient(#e2fded 0%, #9cebb4 10%, #61d684 45%, #607fcb 85%),
+        repeating-radial-gradient(farthest-side at 50% 0%, #ffffff00, #ffffff00 2rem, #61bfc920 2rem, #61bfc920 3rem);
+    text-shadow:
+    /* Outline */
+    -0.1rem -0.1rem 0.15rem white,
+     0   -0.1rem 0.15rem white,
+     0.1rem -0.1rem 0.15rem white,
+     0.1rem  0   0.15rem white,
+     0.1rem  0.1rem 0.15rem white,
+     0    0.1rem 0.15rem white,
+    -0.1rem  0.1rem 0.15rem white,
+    -0.1rem  0   0.15rem white;
+
+    color: #3cc6a3;
+    pointer-events: none;
 }
 
 /* Content */
@@ -93,16 +170,19 @@ ul li  {
     outline-color: #ffffff40;
     outline-offset: -0.1rem;
     
-    width: 60%;
+    max-width: max-content;
     min-width: min-content;
     min-height: 40rem;
     margin: auto;
-
-    padding: 0 0.5rem 0 0.5rem;
 }
 
 h2 {
     font-family: 'Fontdiner Swanky';
     font-weight: 400;
     font-size: 1.5rem;
+    margin: 1rem;
+}
+
+p {
+    margin: 1rem;
 }
