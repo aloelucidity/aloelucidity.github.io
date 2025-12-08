@@ -67,10 +67,13 @@ ul li {
 /* Navigation Bar Buttons */
 ul li a  {
     /* Sizing */
-    display: block;
-    padding: 0.5rem 2rem 0.5rem 2rem;
     white-space: nowrap;
+    min-height: 3rem;
+
+    display: flex;
     flex-grow: 1;
+    justify-content: center;
+    align-items: center;
 
     /* Background */
     background-color: #808080;
@@ -124,15 +127,12 @@ ul li a:hover {
     -0.1rem  0   0.2rem #3cc6a3,
     /* Other */
     0 0 3rem #298ba3, 0.2rem 0.25rem 0.15rem #7e77d4a0;
-    
-    padding: 0.38rem 1.75rem 0.38rem 1.75rem;
+
     font-size: 1.65rem;
 }
 
 ul li a:active {
-    padding: 0.5rem 2rem 0.5rem 2rem;
     font-size: 1.5rem;
-
     color: #9cebb4;
     transition: all 0.05s ease;
 }
@@ -170,19 +170,21 @@ ul li a:active {
     outline-color: #ffffff40;
     outline-offset: -0.1rem;
     
-    max-width: max-content;
+    max-width: 70%;
     min-width: min-content;
     min-height: 40rem;
     margin: auto;
 }
 
-h2 {
+/* About me */
+
+.aboutme {
+    padding: 1.5rem;
+    padding-top: 0;
+}
+
+.aboutme h2 {
     font-family: 'Fontdiner Swanky';
     font-weight: 400;
     font-size: 1.5rem;
-    margin: 1rem;
-}
-
-p {
-    margin: 1rem;
 }
