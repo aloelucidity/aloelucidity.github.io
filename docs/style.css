@@ -232,16 +232,16 @@ ul li a:active {
 
 .footer a, .footer p {
     color: #063a50;
-    text-shadow: 0.1rem 0.1rem 0.15rem #7e77d460, 0 0 0.1rem #00000040, 0 0 0.3rem #ffffff40;
+    text-shadow: 0.1rem 0.1rem 0.15rem #7e77d460, 0 0 0.5rem #00004080, 0 0 0.1rem #8888ff;
 }
 
 .footer a {
     padding: 0 0.15rem 0 0.15rem;
-    color: rgb(29, 63, 164);
+    color: #7cffd8;
 }
 
 .footer a:visited {
-   color: rgb(122, 6, 140);
+    color: #cad9ff;
 }
 
 /* Misc */
