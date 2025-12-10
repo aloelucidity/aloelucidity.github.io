@@ -5,8 +5,16 @@
     font-style: normal;
     font-weight: 400;
     src: url('assets/fontdiner-swanky-v24-latin-regular.woff2') format('woff2');
-  }
-  
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Zen Antique Soft';
+    font-style: normal;
+    font-weight: 400;
+    src: url('assets/zen-antique-soft-v14-latin-regular.woff2') format('woff2');
+}
+
 
 /* Background */
 body {
@@ -177,14 +185,73 @@ ul li a:active {
 }
 
 /* About me */
-
 .aboutme {
     padding: 1.5rem;
     padding-top: 0;
 }
 
-.aboutme h2 {
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(#ffffff00 0%, #ddeeffd0 10%, #ddeeff20 100%);
+    
+    margin: 3rem -1rem 0 -1rem;
+    padding: 1rem;
+}
+
+.footer-column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0.5rem 2rem 0 2rem;
+}
+
+.footer h4 {
+    color: white;
+    padding: 0 0.3rem 0 0.3rem;
+    margin: 0;
+
     font-family: 'Fontdiner Swanky';
     font-weight: 400;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+
+    text-align: center;
+    text-shadow: 0.3rem 0.3rem 0.05rem #7e77d4a0;
+    -webkit-text-stroke: 0.3rem transparent;
+    
+    background-image: linear-gradient(in hsl longer hue 45deg, rgb(144, 16, 16) 0 100%);
+    background-clip: padding-box;
+    -webkit-background-clip: text;
+}
+
+.footer p, .footer a, .footer h4 {
+    text-align: center;
+    margin: 0;
+}
+
+/* Misc */
+p {
+    color: #0e688e;
+    text-shadow: 0.1rem 0.1rem 0.15rem #7e77d460;
+
+    font-family: 'Zen Antique Soft';
+    font-weight: 400;
+}
+
+h2, h4 {
+    color: white;
+    padding: 0 0.3rem 0 0.3rem;
+    width: fit-content;
+    margin: 0 0 -0.5rem 0;
+
+    font-family: 'Fontdiner Swanky';
+    font-weight: 400;
+
+    text-shadow: 0.25rem 0.25rem 0.15rem #7e77d4a0;
+    -webkit-text-stroke: 0.3rem transparent;
+    
+    background-image: linear-gradient(in hsl longer hue 45deg, rgb(144, 16, 16) 0 100%);
+    background-clip: padding-box;
+    -webkit-background-clip: text;
 }
