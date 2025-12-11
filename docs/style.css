@@ -184,11 +184,68 @@ ul li a:active {
     margin: auto;
 }
 
-/* About me */
-.aboutme {
+/* Home */
+.home {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     padding: 1.5rem;
     padding-top: 0;
 }
+
+.home-section {
+    display: flex;
+    gap: 2rem;
+    flex-grow: 1;
+}
+
+.stuff-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto;
+    gap: 0px;
+
+    width: 45rem;
+}
+
+.stuff-image {
+    max-width: 100%;
+    max-height: 100%;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+button {
+    border: none;
+    background: none;
+    background-image: url("assets/luci-idle.gif");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    image-rendering: pixelated;
+    min-width: 10rem;
+    aspect-ratio: 56/71;
+    filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
+    transition: all 0.05s ease;
+}
+
+button:hover {
+    transform: translateY(-0.25rem);
+    transition: all 0.1s ease-in;
+    
+    filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
+}
+
+button:active {
+    background-image: url("assets/luci-pose.gif");
+    transform: translateY(-0.75rem) scale(1.025);
+    transition: all 0s ease;
+}
+
 
 /* Footer */
 .footer {
