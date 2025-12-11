@@ -231,6 +231,7 @@ button {
     aspect-ratio: 56/71;
     filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
     transition: all 0.05s ease;
+    cursor: pointer;
 }
 
 button:hover {
