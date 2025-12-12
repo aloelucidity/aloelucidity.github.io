@@ -69,6 +69,12 @@ function scoretoText(score, decimals, isLong) {
         displayScore = (score / Math.pow(10, power * 3)).toFixed(decimals);
     }
 
+    if (!isFinite(score)) {
+        multCounter.style.display = "none";
+        expCounter.style.display = "none";
+        return "congrats, you won...?";
+    }
+
     return displayScore + suffix;
 }
 
