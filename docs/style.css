@@ -45,7 +45,7 @@ body {
     background-repeat: no-repeat;
 
     margin: 1.5rem auto 0 auto;
-    padding-bottom: 1rem;
+    padding-bottom: 1.5rem;
 
     user-select: none;
 }
@@ -55,7 +55,9 @@ ul {
     display: flex;
     align-items: center;
     list-style-type: none;
+
     padding-inline: 0;
+    margin-block-start: 0;
 
     color: transparent;
     background-color: transparent;
@@ -342,6 +344,10 @@ button:active {
     color: mediumorchid;
 }
 
+.footer-padding {
+    flex-grow: 1;
+}
+
 /* Misc */
 p {
     color: #0e688e;
@@ -371,4 +377,15 @@ h2, h3, h4 {
     background-image: linear-gradient(in hsl longer hue 45deg, rgb(144, 16, 16) 0 100%);
     background-size: cover;
     -webkit-background-clip: text;
+}
+
+html, body, .site {
+    height: 100%;
+    min-height: 100%;
+}
+
+.site {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
