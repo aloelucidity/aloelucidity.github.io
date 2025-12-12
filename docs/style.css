@@ -236,6 +236,7 @@ button {
     background-image: url("assets/luci-idle.gif");
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
 
     image-rendering: pixelated;
     min-width: 10rem;
@@ -258,13 +259,42 @@ button:active {
     transition: all 0s ease;
 }
 
+@keyframes bounce {
+    0% {
+        transform: translateY(-1.5rem) scale(0.9);
+        animation-timing-function: ease-out;
+        opacity: 80%;
+    }
+    30% {
+        transform: translateY(-2.5rem) scale(1.025);
+        animation-timing-function: ease-in;
+        opacity: 100%;
+    }
+    100% {
+        transform: translateY(3rem) scale(0.7);
+        opacity: 0%;
+    }
+}
+
+.floating-label {
+    opacity: 0%;
+    position: absolute;
+    pointer-events: none;
+    transform: translateY(3rem) scale(0.7);
+    animation-name: bounce;
+    animation-duration: 0.85s;
+}
+
 
 /* Footer */
 .footer {
     display: flex;
     justify-content: center;
-    background-image: linear-gradient(#ffffff00 0%, #ddeeffd0 5%, #ddeeff20 100%);
-    
+    background: 
+        linear-gradient(#000000a0 0%, #00000015 100%),
+        repeating-conic-gradient(#00000000 0 25%, #00000020 0 50%) 50% / 3rem 3rem;
+    mask: linear-gradient(transparent 0%, black 5%);
+
     margin: 3rem -1rem 0 -1rem;
     padding: 1rem;
 }
@@ -286,10 +316,10 @@ button:active {
     font-size: 1.25rem;
 
     text-align: center;
-    text-shadow: 0.3rem 0.3rem 0.05rem #7e77d4a0;
+    text-shadow: none;
     -webkit-text-stroke: 0.3rem transparent;
     
-    background-image: linear-gradient(in hsl longer hue 45deg, rgb(144, 16, 16) 0 100%);
+    background-image: linear-gradient(in hsl longer hue 45deg, rgb(144, 48, 48) 0 100%);
     background-clip: padding-box;
     -webkit-background-clip: text;
 }
@@ -300,17 +330,16 @@ button:active {
 }
 
 .footer a, .footer p {
-    color: #063a50;
-    text-shadow: 0.1rem 0.1rem 0.15rem #7e77d460, 0 0 0.5rem #00004080, 0 0 0.1rem #8888ff;
+    color: #5fd6b2;
 }
 
 .footer a {
     padding: 0 0.15rem 0 0.15rem;
-    color: #7cffd8;
+    color: deepskyblue;
 }
 
 .footer a:visited {
-    color: #cad9ff;
+    color: mediumorchid;
 }
 
 /* Misc */
@@ -324,7 +353,7 @@ p, a {
     font-weight: 400;
 }
 
-h2, h4 {
+h2, h3, h4 {
     color: white;
     padding: 0 0.3rem 0 0.3rem;
     margin: 0 0 -0.5rem 0;
@@ -340,6 +369,6 @@ h2, h4 {
     -webkit-text-stroke: 0.3rem transparent;
     
     background-image: linear-gradient(in hsl longer hue 45deg, rgb(144, 16, 16) 0 100%);
-    background-clip: padding-box;
+    background-size: cover;
     -webkit-background-clip: text;
 }
