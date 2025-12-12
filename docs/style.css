@@ -1,3 +1,65 @@
+/* Mobile */
+@media only screen and (max-width: 600px) {
+    html {
+        font-size: 12px;
+    }
+
+    /* High level */
+    body .logo {
+        margin: 0;
+        margin-top: 0.5rem;
+        width: calc(100vw - 16px);
+        min-width: 0;
+    }
+    body .content {
+        width: calc(100vw - 16px);
+        min-width: 0;
+    }
+    body .footer {
+        width: calc(100vw - 16px);
+        min-width: 0;
+        flex-direction: column;
+        padding-top: 2rem;
+    }
+    .footer-column .footer-links {
+        flex-direction: row;
+    }
+    
+    /* Home */
+    body .home .home-section {
+        flex-direction: column;
+    }
+    .home-section .stuff-container {
+        order: 1;
+        min-height: 16rem;
+        width: 100%;
+    }
+    .home-section h2 {
+        width: 100%;
+        text-align: center;
+    }
+    .home-section iframe {
+        width: 100%;
+        height: 32rem;
+    }
+    .home-section button {
+        min-width: 0;
+        height: 12rem;
+        order: -1;
+    }
+    .home-section .multipliers {
+        order: -1;
+    }
+
+    /* Navigation */
+    div ul {
+        flex-direction: column;
+    }
+    div ul li  {
+        width: 100%;
+    }
+}
+
 /* Fonts */
 @font-face {
     font-display: swap;
@@ -17,12 +79,20 @@
 
 
 /* Background */
-body {
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
     background-color: #0e688e;
     background:
-        url("assets/noise.png") left top / 80rem 45rem repeat fixed,
-        url("assets/stars.png") left top / 4rem 4rem repeat fixed,
-        url("assets/background.png") left top / 100% 100% no-repeat fixed;
+        url("assets/noise.png") left top / 80rem 45rem repeat,
+        url("assets/stars.png") left top / 4rem 4rem repeat,
+        url("assets/background.png") left top / 100% 100% no-repeat;
     background-blend-mode: color-dodge, screen, normal;
     animation: scroll 120s linear infinite;
 }
@@ -169,6 +239,9 @@ ul li a:active {
 
 /* Content */
 .content {
+    display: flex;
+    flex-direction: column;
+
     background-color: #000000ff;
     background:
         linear-gradient(#cce4ef 0%, #e4eef1 100%),
@@ -180,9 +253,11 @@ ul li a:active {
     outline-color: #ffffff40;
     outline-offset: -0.1rem;
     
-    max-width: 70%;
-    min-width: min-content;
+    width: 70%;
+    min-width: 48rem;
     min-height: min-content;
+
+    flex-grow: 1;
     margin: auto;
 }
 
@@ -190,6 +265,9 @@ ul li a:active {
 .home {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    
     gap: 1.5rem;
     padding: 1.5rem;
     padding-top: 0;
@@ -198,38 +276,15 @@ ul li a:active {
 .home-section {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    column-gap: 2rem;
     flex-grow: 1;
+    flex-basis: 0;
 }
 
 .home-text {
     flex-grow: 1;
-}
-
-.multipliers {
-    display: none;
-    justify-content: space-evenly;
-    margin-top: -2rem;
-    margin-bottom: 1rem;
-}
-
-.stuff-container {
-    display: flex;
-    gap: 0.3rem;
-    min-width: 16rem;
-}
-
-.stuff-col {
-    flex-grow: 1;
-    flex-direction: column;
-}
-
-.stuff-image {
-    width: 100%;
-    height: 50%;
-    object-fit: cover;
-    object-position: center;
-    contain: size;
+    flex-basis: 0;
+    margin-bottom: 0;
 }
 
 button {
@@ -240,12 +295,16 @@ button {
     background-size: contain;
     background-position: center;
 
-    image-rendering: pixelated;
-    min-width: 10rem;
+    min-width: 8rem;
     aspect-ratio: 56/71;
+    margin: 1rem;
+
+    image-rendering: pixelated;
     filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
     transition: all 0.05s ease;
+
     cursor: pointer;
+    touch-action: manipulation;
 }
 
 button:hover {
@@ -287,25 +346,63 @@ button:active {
     animation-duration: 0.85s;
 }
 
+.multipliers {
+    display: none;
+    justify-content: space-evenly;
+    margin-top: -2rem;
+    margin-bottom: 1rem;
+}
+
+.stuff-container {
+    display: flex;
+    gap: 0.3rem;
+    aspect-ratio: 4/3;
+    width: 30%;
+}
+
+.stuff-col {
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.stuff-image {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    object-position: center;
+    contain: size;
+}
+
+iframe {
+    height: 100%;
+    aspect-ratio: 5/6;
+}
+
 
 /* Footer */
 .footer {
     display: flex;
     justify-content: center;
     background: 
-        linear-gradient(#000000a0 0%, #00000015 100%),
-        repeating-conic-gradient(#00000000 0 25%, #00000020 0 50%) 50% / 3rem 3rem;
+        linear-gradient(#000000c0 0%, #00000015 100%),
+        repeating-conic-gradient(#00000000 0 25%, #00000015 0 50%) 50% / 3rem 3rem;
     mask: linear-gradient(transparent 0%, black 5%);
 
     margin: 3rem -1rem 0 -1rem;
     padding: 1rem;
+    gap: 2rem;
 }
 
 .footer-column {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 0.25rem 0rem 0 2rem;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .footer h4 {
