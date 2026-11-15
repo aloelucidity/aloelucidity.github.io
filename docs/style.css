@@ -449,6 +449,10 @@ html, body {
     min-height: 100%;
 }
 
+form {
+    display: flex;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
     html {
@@ -499,8 +503,9 @@ html, body {
         height: 12rem;
         order: -1;
     }
-    .home-section .multipliers {
+    .multipliers {
         order: -1;
+        margin-top: 2rem;
     }
 
     /* Navigation */
@@ -509,5 +514,9 @@ html, body {
     }
     div ul li  {
         width: 100%;
+    }
+
+    form {
+        justify-content: center;
     }
 }
