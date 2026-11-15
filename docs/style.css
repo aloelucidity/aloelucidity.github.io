@@ -1,65 +1,3 @@
-/* Mobile */
-@media only screen and (max-width: 600px) {
-    html {
-        font-size: 12px;
-    }
-
-    /* High level */
-    body .logo {
-        margin: 0;
-        margin-top: 0.5rem;
-        width: 100vw;
-        min-width: 0;
-    }
-    body .content {
-        width: 100vw;
-        min-width: 0;
-    }
-    body .footer {
-        width: 100vw;
-        min-width: 0;
-        flex-direction: column;
-        padding-top: 2rem;
-    }
-    .footer-column .footer-links {
-        flex-direction: row;
-    }
-    
-    /* Home */
-    body .home .home-section {
-        flex-direction: column;
-    }
-    .home-section .stuff-container {
-        order: 1;
-        min-height: 16rem;
-        width: 100%;
-    }
-    .home-section h2 {
-        width: 100%;
-        text-align: center;
-    }
-    .home-section iframe {
-        width: 100%;
-        height: 32rem;
-    }
-    .home-section button {
-        min-width: 0;
-        height: 12rem;
-        order: -1;
-    }
-    .home-section .multipliers {
-        order: -1;
-    }
-
-    /* Navigation */
-    div ul {
-        flex-direction: column;
-    }
-    div ul li  {
-        width: 100%;
-    }
-}
-
 /* Fonts */
 @font-face {
     font-display: swap;
@@ -116,6 +54,7 @@ body::before {
 
     margin: 1.5rem auto 0 auto;
     padding-bottom: 1.5rem;
+    object-fit: contain;
 
     user-select: none;
 }
@@ -257,7 +196,6 @@ ul li a:active {
     min-width: 48rem;
     min-height: min-content;
 
-    flex-grow: 1;
     margin: auto;
 }
 
@@ -265,7 +203,6 @@ ul li a:active {
 .home {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     justify-content: space-between;
     
     gap: 1.5rem;
@@ -277,7 +214,7 @@ ul li a:active {
     display: flex;
     justify-content: center;
     column-gap: 2rem;
-    flex-grow: 1;
+    flex-grow: 0;
     flex-basis: 0;
 }
 
@@ -358,6 +295,8 @@ button:active {
     gap: 0.3rem;
     aspect-ratio: 4/3;
     width: 30%;
+    max-width: 25em;
+    margin: auto;
 }
 
 .stuff-col {
@@ -380,6 +319,10 @@ iframe {
 
 
 /* Footer */
+.padding {
+    flex-grow: 1;
+}
+
 .footer {
     display: flex;
     justify-content: center;
@@ -459,6 +402,7 @@ p, a {
 h2, h3, h4 {
     color: white;
     padding: 0 0.3rem 0 0.3rem;
+    padding-top: 0.3rem;
     margin: 0 0 -0.5rem 0;
 
     width: fit-content;
@@ -473,16 +417,79 @@ h2, h3, h4 {
     
     background-image: linear-gradient(in hsl longer hue 45deg, rgb(144, 16, 16) 0 100%);
     background-size: cover;
+    background-clip: text;
     -webkit-background-clip: text;
 }
 
 html, body, .site {
     height: 100%;
-    min-height: 100%;
 }
 
 .site {
     display: flex;
     flex-direction: column;
     gap: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    /* High level */
+    body .logo {
+        margin: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+        min-width: 0;
+    }
+    body .content {
+        width: 100%;
+        min-width: 0;
+    }
+    body .footer {
+        width: 100%;
+        min-width: 0;
+        flex-direction: column;
+        padding-top: 2rem;
+    }
+    
+    /* Home */
+    body .home .home-section {
+        flex-direction: column;
+    }
+    .home-section .stuff-container {
+        order: 1;
+        min-height: 16rem;
+        width: 100%;
+    }
+    .home-section h2 {
+        width: 100%;
+        text-align: center;
+    }
+    .home-section iframe {
+        width: 100%;
+        height: 32rem;
+    }
+    .home-section button {
+        min-width: 0;
+        height: 12rem;
+        order: -1;
+    }
+    .home-section .multipliers {
+        order: -1;
+    }
+
+    /* Navigation */
+    div ul {
+        flex-direction: column;
+    }
+    div ul li  {
+        width: 100%;
+    }
 }
