@@ -442,7 +442,7 @@ a:not(ul li a):active {
     transition: all 0.05s ease;
 }
 
-html, body, .site {
+html, body {
     height: 100%;
 }
 
@@ -450,6 +450,7 @@ html, body, .site {
     display: flex;
     flex-direction: column;
     gap: 0;
+    min-height: 100%;
 }
 
 /* Mobile */
