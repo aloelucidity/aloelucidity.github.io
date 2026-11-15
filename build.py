@@ -19,7 +19,7 @@ def build_site():
             page_name = filename[:-5]
             
             if page_name == "index":
-                title = "about me - aloelucidity"
+                title = "aloelucidity"
                 active_file = "index.html"
             else:
                 title = f"{page_name.replace('-', ' ')} - aloelucidity"

@@ -9,16 +9,24 @@ const scoreCounter = document.getElementById("score-counter");
 const multCounter = document.getElementById("mult-counter");
 const expCounter = document.getElementById("exp-counter");
 
+const preloadPose = new Image();
+preloadPose.src = "assets/luci-pose.gif";
 
 function luciClicked(event) {
     let rng = Math.random()
     if (rng < 0.15) {
         multiplier += 1
         multCounter.textContent = "multiplier - x" + multiplier.toString();
+
+        const event = new CustomEvent("multUp");
+        window.dispatchEvent(event);
     }
     if (rng < 0.02) {
         exponent += 1
         expCounter.innerHTML = "exponent - x<sup>" + exponent.toString() + "</sup>";
+        
+        const event = new CustomEvent("expUp");
+        window.dispatchEvent(event);
     }
 
     score += Math.pow(multiplier, exponent);

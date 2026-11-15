@@ -4,11 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>about me - aloelucidity</title>
+    <title>aloelucidity</title>
     <link rel="icon" type="image/x-icon" href="assets/icon.png">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <audio id="hover-sound" src="assets/hover.mp3" preload="auto"></audio>
+    <audio id="click-sound" src="assets/click.mp3" preload="auto"></audio>
+    <script src="sounds.js" defer></script>
+
     <div class="site">
       <img class="logo" src="assets/logo-full.png" alt="aloelucidity">
       <div class="content">
@@ -17,6 +21,7 @@
           <li><a href="games.html">games</a></li>
           <li><a href="audiovisual.html">audiovisual</a></li>
           <li><a href="deep-dives.html">deep dives</a></li>
+          <li><a href="javascript:void(0);" id="sound-toggle" class="sound-toggle">sound: on</a></li>
         </ul>
         <div class="home">
           <div class="home-section">
@@ -28,7 +33,10 @@
                 flash games had a big impact on me growing up, and that tends to show in my style. still, i hold myself to a pretty high standard, i'm always trying to improve :)
               </p>
             </div>
-            <button id="clickable-luci"></button>
+            <button id="clickable-luci" class="clickable-luci"></button>
+            <audio id="luci-sound" src="assets/luci.mp3" preload="auto"></audio>
+            <audio id="mult-up-sound" src="assets/mult-up.mp3" preload="auto"></audio>
+            <audio id="exp-up-sound" src="assets/exp-up.mp3" preload="auto"></audio>
             <script src="clicker.js" defer></script>
           </div>
           

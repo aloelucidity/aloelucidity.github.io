@@ -84,7 +84,7 @@ ul li {
 }
 
 /* Navigation Bar Buttons */
-ul li a  {
+ul li a, .sound-toggle  {
     /* Sizing */
     white-space: nowrap;
     min-height: 3rem;
@@ -133,7 +133,7 @@ ul li a  {
     transition: all 0.3s ease;
 }
 
-ul li a:hover {
+ul li a:hover, .sound-toggle:hover {
     text-shadow: 
     /* Outline */
     -0.1rem -0.1rem 0.2rem #3cc6a3,
@@ -150,7 +150,7 @@ ul li a:hover {
     font-size: 1.65rem;
 }
 
-ul li a:active {
+ul li a:active, .sound-toggle:active {
     font-size: 1.5rem;
     color: #9cebb4;
     transition: all 0.05s ease;
@@ -224,7 +224,7 @@ ul li a:active {
     margin-bottom: 0;
 }
 
-button {
+.clickable-luci {
     border: none;
     background: none;
     background-image: url("assets/luci-idle.gif");
@@ -244,14 +244,14 @@ button {
     touch-action: manipulation;
 }
 
-button:hover {
+.clickable-luci:hover {
     transform: translateY(-0.25rem);
     transition: all 0.1s ease-in;
     
     filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
 }
 
-button:active {
+.clickable-luci:active {
     background-image: url("assets/luci-pose.gif");
     transform: translateY(-0.75rem) scale(1.025);
     transition: all 0s ease;
@@ -402,8 +402,10 @@ p, a {
 h2, h3, h4 {
     color: white;
     padding: 0 0.3rem 0 0.3rem;
-    padding-top: 0.3rem;
     margin: 0 0 -0.5rem 0;
+    
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
 
     width: fit-content;
     height: fit-content;
@@ -476,7 +478,7 @@ html, body, .site {
         width: 100%;
         height: 32rem;
     }
-    .home-section button {
+    .home-section .clickable-luci {
         min-width: 0;
         height: 12rem;
         order: -1;

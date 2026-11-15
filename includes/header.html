@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <audio id="hover-sound" src="assets/hover.mp3" preload="auto"></audio>
+    <audio id="click-sound" src="assets/click.mp3" preload="auto"></audio>
+    <script src="sounds.js" defer></script>
+
     <div class="site">
       <img class="logo" src="assets/logo-full.png" alt="aloelucidity">
       <div class="content">
@@ -17,4 +21,5 @@
           <li><a href="games.html">games</a></li>
           <li><a href="audiovisual.html">audiovisual</a></li>
           <li><a href="deep-dives.html">deep dives</a></li>
+          <li><a href="javascript:void(0);" id="sound-toggle" class="sound-toggle">sound: on</a></li>
         </ul>
