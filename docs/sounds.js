@@ -22,18 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function playSound(audioElement) {
         if (!soundEnabled) return;
-        audioElement.volume = 0.5;
+        audioElement.volume = 0.35;
         audioElement.currentTime = 0;
         audioElement.play().catch(() => {});
     }
 
-    document.querySelectorAll('ul li a, button').forEach(element => {
+    document.querySelectorAll('a, button').forEach(element => {
     element.addEventListener('mouseenter', () => {
         playSound(hoverSound);
     });
     });
 
-    document.querySelectorAll('ul li a').forEach(link => {
+    document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', function(e) {
         if (!soundEnabled) return;
         
