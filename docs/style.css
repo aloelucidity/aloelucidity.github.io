@@ -60,7 +60,7 @@ body::before {
 }
 
 /* Navigation Bar */
-ul {
+ul:not(.formkit-alert) {
     display: flex;
     align-items: center;
     list-style-type: none;
@@ -215,13 +215,13 @@ ul li a:active, .sound-toggle:active {
     justify-content: center;
     column-gap: 2rem;
     flex-grow: 0;
-    flex-basis: 0;
+    height: min-content;
 }
 
 .home-text {
     flex-grow: 1;
-    flex-basis: 0;
     margin-bottom: 0;
+    height: min-content;
 }
 
 .clickable-luci {
@@ -389,11 +389,11 @@ iframe {
 }
 
 /* Misc */
-p {
+p, .formkit-alert {
     color: #0e688e;
 }
 
-p, a {
+p, a, .formkit-alert {
     text-shadow: 0.1rem 0.1rem 0.15rem #7e77d460;
     font-family: 'Zen Antique Soft';
     font-weight: 400;
@@ -421,6 +421,10 @@ h2, h3, h4 {
     background-size: cover;
     background-clip: text;
     -webkit-background-clip: text;
+}
+/* Formkit */
+.seva-fields {
+    display: flex;
 }
 
 /* Animated links */ 

@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playSound(expUpSound);
     });
 
-    document.querySelectorAll('.sound-toggle').forEach(btn => {
+    document.querySelectorAll('.sound-toggle, button').forEach(btn => {
         btn.addEventListener('click', () => {
             playSound(clickSound);
         });
