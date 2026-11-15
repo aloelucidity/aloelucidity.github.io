@@ -389,12 +389,12 @@ iframe {
 }
 
 /* Misc */
-p, .formkit-alert {
-    color: #0e688e;
+p {
+    color: #042341;
 }
 
-p, a, .formkit-alert {
-    text-shadow: 0.1rem 0.1rem 0.15rem #7e77d460;
+p, a {
+    text-shadow: 0.1rem 0.1rem 0.15rem #7e77d440;
     font-family: 'Zen Antique Soft';
     font-weight: 400;
 }
@@ -421,10 +421,6 @@ h2, h3, h4 {
     background-size: cover;
     background-clip: text;
     -webkit-background-clip: text;
-}
-/* Formkit */
-.seva-fields {
-    display: flex;
 }
 
 /* Animated links */ 
