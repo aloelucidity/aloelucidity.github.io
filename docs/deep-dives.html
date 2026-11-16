@@ -12,7 +12,26 @@
     <audio id="hover-sound" src="assets/hover.mp3" preload="auto"></audio>
     <audio id="click-sound" src="assets/click.mp3" preload="auto"></audio>
     <script src="sounds.js" defer></script>
+    <script src="puzzle.js" defer></script>
 
+    <div id="puzzle-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-top">
+          <span class="close-button">go back</span>
+        </div>
+        <div id="puzzle-board"></div>
+        <hr>
+        <div class="time-container">
+          <h2>time:</h2>
+          <h2 id="puzzle-timer">00:00.00</h2>
+        </div>
+        <div class="time-container">
+          <h2>best:</h2>
+          <h2 id="puzzle-best">00:00.00</h2>
+        </div>
+      </div>
+    </div>
+    
     <div class="site">
       <img class="logo" src="assets/logo-full.png" alt="aloelucidity">
       <div class="content">
