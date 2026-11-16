@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioElement.play().catch(() => {});
     }
 
-    document.querySelectorAll('a, button, img').forEach(element => {
+    document.querySelectorAll('a, button, img:not(.logo)').forEach(element => {
     element.addEventListener('mouseenter', () => {
         playSound(hoverSound);
     });
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playSound(expUpSound);
     });
 
-    document.querySelectorAll('.sound-toggle, .submit-button, img').forEach(btn => {
+    document.querySelectorAll('.sound-toggle, .submit-button, img:not(.logo)').forEach(btn => {
         btn.addEventListener('click', () => {
             playSound(clickSound);
         });
