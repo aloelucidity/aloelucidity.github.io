@@ -455,7 +455,7 @@ form {
 }
 
 /* Slide Puzzles */
-.time-container {
+.score-container {
     display: flex;
     justify-content: space-between;
 }

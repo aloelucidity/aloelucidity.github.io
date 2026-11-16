@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const hoverSound = document.getElementById('hover-sound');
     const clickSound = document.getElementById('click-sound');
+    const backSound = document.getElementById('back-sound');
+    const tileHoverSound = document.getElementById('tile-hover-sound');
+    const mouseClickSound = document.getElementById('mouse-click-sound');
+    const puzzleWinSound = document.getElementById('puzzle-win-sound');
     const luciSound = document.getElementById('luci-sound');
     const multUpSound = document.getElementById('mult-up-sound');
     const expUpSound = document.getElementById('exp-up-sound');
@@ -27,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioElement.play().catch(() => {});
     }
 
-    document.querySelectorAll('a, button, img:not(.logo)').forEach(element => {
+    document.querySelectorAll('a, button, img:not(.logo), .close-button').forEach(element => {
     element.addEventListener('mouseenter', () => {
         playSound(hoverSound);
     });
@@ -67,9 +71,27 @@ document.addEventListener('DOMContentLoaded', () => {
         playSound(expUpSound);
     });
 
+    window.addEventListener('tileHovered', (event) => {
+        playSound(tileHoverSound);
+    });
+
+    window.addEventListener('moveMade', (event) => {
+        playSound(mouseClickSound);
+    });
+
+    window.addEventListener('puzzleWon', (event) => {
+        playSound(puzzleWinSound);
+    });
+
     document.querySelectorAll('.sound-toggle, .submit-button, img:not(.logo)').forEach(btn => {
         btn.addEventListener('click', () => {
             playSound(clickSound);
+        });
+    });
+
+    document.querySelectorAll('.close-button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            playSound(backSound);
         });
     });
 })

@@ -11,6 +11,10 @@
   <body>
     <audio id="hover-sound" src="assets/hover.mp3" preload="auto"></audio>
     <audio id="click-sound" src="assets/click.mp3" preload="auto"></audio>
+    <audio id="back-sound" src="assets/back.mp3" preload="auto"></audio>
+    <audio id="tile-hover-sound" src="assets/tile-hover.mp3" preload="auto"></audio>
+    <audio id="mouse-click-sound" src="assets/mouse-click.mp3" preload="auto"></audio>
+    <audio id="puzzle-win-sound" src="assets/puzzle-win.mp3" preload="auto"></audio>
     <script src="sounds.js" defer></script>
     <script src="puzzle.js" defer></script>
 
@@ -21,13 +25,13 @@
         </div>
         <div id="puzzle-board"></div>
         <hr>
-        <div class="time-container">
-          <h2>time:</h2>
-          <h2 id="puzzle-timer">00:00.00</h2>
+        <div class="score-container">
+          <h2>moves:</h2>
+          <h2 id="puzzle-score">0</h2>
         </div>
-        <div class="time-container">
+        <div class="score-container">
           <h2>best:</h2>
-          <h2 id="puzzle-best">00:00.00</h2>
+          <h2 id="puzzle-best">-</h2>
         </div>
       </div>
     </div>

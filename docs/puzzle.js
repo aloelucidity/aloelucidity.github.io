@@ -1,7 +1,7 @@
 const modal = document.getElementById('puzzle-modal');
 const board = document.getElementById('puzzle-board');
-const timer = document.getElementById('puzzle-timer');
-const best = document.getElementById('puzzle-best');
+const puzzleScore = document.getElementById('puzzle-score');
+const puzzleBest = document.getElementById('puzzle-best');
 const closeButton = document.querySelector('.close-button');
 
 const size = 3;
@@ -12,9 +12,7 @@ let emptyIndex = totalTiles - 1;
 let isAnimating = false;
 let isWon = false;
 
-let startTime = null;
-let timerInterval = null;
-let elapsedTime = 0;
+let curMoves = 0;
 let currentImgSrc = '';
 
 document.querySelectorAll('img:not(.logo)').forEach(img => {
@@ -24,18 +22,19 @@ document.querySelectorAll('img:not(.logo)').forEach(img => {
 
 closeButton.onclick = () => {
     modal.classList.remove('active');
-    stopTimer();
 }
 
 function loadAndOpenPuzzle(imgSrc) {
     currentImgSrc = imgSrc;
     isWon = false;
+
     board.classList.remove('won');
     modal.classList.add('active');
 
+    curMoves = 0;
+    puzzleScore.textContent = curMoves;
+
     updateBestDisplay(imgSrc);
-    resetTimer();
-    startTimer();
     
     // i dont actually use this image its just for getting aspect ratio
     const imgObj = new Image();
@@ -107,6 +106,7 @@ function initPuzzle(imgSrc) {
         tile.style.backgroundPosition = `${(col / (size - 1)) * 100}% ${(row / (size - 1)) * 100}%`;
     
         tile.addEventListener('click', () => handleTileClick(i));
+        tile.addEventListener('mouseenter', () => handleTileHover(i));
         tileElements.push(tile);
     }
   
@@ -148,7 +148,12 @@ function handleTileClick(clickedTileId) {
     tiles[emptyIndex] = clickedTileId;
     tiles[currentIndex] = totalTiles - 1;
     emptyIndex = currentIndex;
-  
+
+    curMoves += 1;
+    puzzleScore.textContent = curMoves;
+    const event = new CustomEvent("moveMade");
+    window.dispatchEvent(event);
+
     renderBoard();
   
     const lastMovingRect = movingTile.getBoundingClientRect();
@@ -170,12 +175,20 @@ function handleTileClick(clickedTileId) {
   
     movingTile.style.transition = initialTransition;
     movingTile.style.transform = initialTransform;
-  
+
     setTimeout(() => {
         movingTile.style.transition = '';
         isAnimating = false;
         checkWin();
     }, 110);
+}
+
+function handleTileHover(hoveredTileId) {
+    const hoveredTile = tileElements[hoveredTileId];
+    if (!isAnimating && !isWon && !hoveredTile.classList.contains('empty')) {
+        const event = new CustomEvent("tileHovered");
+        window.dispatchEvent(event);
+    }
 }
 
 function isAdjacent(i1, i2) {
@@ -189,57 +202,31 @@ function checkWin() {
         isWon = true;
         board.classList.add('won');
         tileElements[totalTiles - 1].classList.remove('empty');
-        stopTimer();
-        checkAndSaveBestTime(elapsedTime, currentImgSrc);
+        checkAndSaveBestScore(currentImgSrc);
+
+        const event = new CustomEvent("puzzleWon");
+        window.dispatchEvent(event);
     }
 }
 
-// timer stuff
 
-function startTimer() {
-    startTime = Date.now() - elapsedTime;
-    timerInterval = setInterval(() => {
-        elapsedTime = Date.now() - startTime;
-        if (timer) timer.textContent = formatTime(elapsedTime);
-    }, 30);
-}
-
-function stopTimer() {
-    clearInterval(timerInterval);
-}
-
-function resetTimer() {
-    stopTimer();
-    elapsedTime = 0;
-    if (timer) timer.textContent = '00:00.00';
-}
-
-function formatTime(ms) {
-    const totalSeconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    const hundredths = Math.floor((ms % 1000) / 10);
-
-    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
-}
-
-function checkAndSaveBestTime(currentMs, imgSrc) {
-    const key = `puzzle_best_time_${imgSrc}`;
+function checkAndSaveBestScore(imgSrc) {
+    const key = `puzzle_best_score_${imgSrc}`;
     const savedBest = localStorage.getItem(key);
     
-    if (!savedBest || currentMs < parseInt(savedBest, 10)) {
-        localStorage.setItem(key, currentMs);
+    if (!savedBest || curMoves < parseInt(savedBest, 10)) {
+        localStorage.setItem(key, curMoves);
         updateBestDisplay(imgSrc);
     }
 }
 
 function updateBestDisplay(imgSrc) {
-    if (!best) return;
-    const key = `puzzle_best_time_${imgSrc}`;
+    if (!puzzleBest) return;
+    const key = `puzzle_best_score_${imgSrc}`;
     const savedBest = localStorage.getItem(key);
     if (savedBest !== null) {
-        best.textContent = formatTime(parseInt(savedBest, 10));
+        puzzleBest.textContent = parseInt(savedBest, 10);
     } else {
-        best.textContent = '--:--.--';
+        puzzleBest.textContent = '-';
     }
 }
