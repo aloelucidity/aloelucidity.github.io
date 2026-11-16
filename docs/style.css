@@ -454,6 +454,19 @@ form {
     display: flex;
 }
 
+button:not(.clickable-luci) {
+    transition: transform 0.3s ease;
+}
+
+button:not(.clickable-luci):hover {
+    transform: scale(1.04);
+}
+
+button:not(.clickable-luci):active {
+    transform: scale(1.15);
+    transition: transform 0.05s ease;
+}
+
 /* Slide Puzzles */
 .score-container {
     display: flex;
