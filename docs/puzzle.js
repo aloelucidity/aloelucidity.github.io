@@ -15,8 +15,7 @@ let isWon = false;
 let startTime = null;
 let timerInterval = null;
 let elapsedTime = 0;
-
-updateBestDisplay();
+let currentImgSrc = '';
 
 document.querySelectorAll('img:not(.logo)').forEach(img => {
     img.style.cursor = 'pointer';
@@ -29,10 +28,12 @@ closeButton.onclick = () => {
 }
 
 function loadAndOpenPuzzle(imgSrc) {
+    currentImgSrc = imgSrc;
     isWon = false;
     board.classList.remove('won');
     modal.classList.add('active');
 
+    updateBestDisplay(imgSrc);
     resetTimer();
     startTimer();
     
@@ -46,10 +47,32 @@ function loadAndOpenPuzzle(imgSrc) {
     };
 }
 
+// url to rng seed
+function hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+    }
+    return Math.abs(hash);
+}
+
+function random(a) {
+    return function() {
+        let t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
+
 function initPuzzle(imgSrc) {
     tiles = Array.from({ length: totalTiles }, (_, i) => i);
     emptyIndex = totalTiles - 1;
   
+    const seed = hashCode(imgSrc);
+    const rng = random(seed);
+    
     // shuffle code
     let prevEmptyIndex = -1;
     for (let i = 0; i < 100; i++) {
@@ -60,7 +83,7 @@ function initPuzzle(imgSrc) {
             validMoves = validMoves.filter(m => m !== prevEmptyIndex);
         }
 
-        const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+        const randomMove = validMoves[Math.floor(rng() * validMoves.length)];
         
         prevEmptyIndex = emptyIndex;
         tiles[emptyIndex] = tiles[randomMove];
@@ -167,7 +190,7 @@ function checkWin() {
         board.classList.add('won');
         tileElements[totalTiles - 1].classList.remove('empty');
         stopTimer();
-        checkAndSaveBestTime(elapsedTime);
+        checkAndSaveBestTime(elapsedTime, currentImgSrc);
     }
 }
 
@@ -200,18 +223,20 @@ function formatTime(ms) {
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
 }
 
-function checkAndSaveBestTime(currentMs) {
-    const savedBest = localStorage.getItem('puzzle_best_time');
+function checkAndSaveBestTime(currentMs, imgSrc) {
+    const key = `puzzle_best_time_${imgSrc}`;
+    const savedBest = localStorage.getItem(key);
     
     if (!savedBest || currentMs < parseInt(savedBest, 10)) {
-        localStorage.setItem('puzzle_best_time', currentMs);
-        updateBestDisplay();
+        localStorage.setItem(key, currentMs);
+        updateBestDisplay(imgSrc);
     }
 }
 
-function updateBestDisplay() {
+function updateBestDisplay(imgSrc) {
     if (!best) return;
-    const savedBest = localStorage.getItem('puzzle_best_time');
+    const key = `puzzle_best_time_${imgSrc}`;
+    const savedBest = localStorage.getItem(key);
     if (savedBest !== null) {
         best.textContent = formatTime(parseInt(savedBest, 10));
     } else {
