@@ -400,6 +400,7 @@ iframe {
         linear-gradient(45deg, #b73c4e, #51588c 20%, #cba3ff 50%, #b73c4e 80%),
         url(assets/games/facsimilebg.png);
     background-blend-mode: multiply;
+    background-size: 100%;
 }
 
 .game-container h1 {
