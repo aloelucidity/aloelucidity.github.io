@@ -586,8 +586,10 @@ img:active:not(.logo) {
         font-size: 12px;
     }
 
-    p {
+    p, h2:not(.score-container h2), h3, h4 {
         text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     /* High level */
