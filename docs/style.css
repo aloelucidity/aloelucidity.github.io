@@ -376,6 +376,32 @@ iframe {
     image-rendering: pixelated;
 }
 
+.game-kinetiball {
+    background: 
+        linear-gradient(#0e9b5580 0%, #00000080 50%, #00000060 100%),
+        url(assets/games/kinetibg.png);
+}
+
+.game-ud {
+    background-image: 
+        radial-gradient(farthest-side at bottom left, #061735, #350f49, #14413f),
+        radial-gradient(farthest-side at top right, #061735, #350f49, #14413f);
+    background-blend-mode: screen;
+}
+
+.game-darius {
+    background: 
+        linear-gradient(#00008080 0%, #000020c0 100%),
+        url(assets/games/dariusbg.png);
+}
+
+.game-facsimile {
+    background-image: 
+        linear-gradient(45deg, #b73c4e, #51588c 20%, #cba3ff 50%, #b73c4e 80%),
+        url(assets/games/facsimilebg.png);
+    background-blend-mode: multiply;
+}
+
 .game-container h1 {
     text-align: center;
     margin-left: auto;
@@ -394,7 +420,7 @@ iframe {
     margin-left: auto;
     margin-right: auto;
 
-    box-shadow: 0rem 0.33rem 1rem #7e77d480;
+    box-shadow: 0rem 0.33rem 1rem #03011680;
 }
 
 .game-data-container {
@@ -411,7 +437,7 @@ iframe {
 }
 
 .game-metadata-container h3 {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.1rem;
 }
 
 .game-buttons-container {
@@ -435,6 +461,14 @@ iframe {
     stroke-width: 0.1rem;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.show-more-button {
+    cursor: pointer;
+}
+
+.games-category-separator {
+    margin-bottom: 3.5rem;
 }
 
 

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioElement.play().catch(() => {});
     }
 
-    document.querySelectorAll('a, button, img:not(.logo), .close-button').forEach(element => {
+    document.querySelectorAll('a, button, img:not(.logo), .close-button, .show-more-button').forEach(element => {
     element.addEventListener('mouseenter', () => {
         playSound(hoverSound);
     });
@@ -86,6 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.sound-toggle, .submit-button, img:not(.logo)').forEach(btn => {
         btn.addEventListener('click', () => {
             playSound(clickSound);
+        });
+    });
+
+    document.querySelectorAll('.show-more-button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            playSound(mouseClickSound);
         });
     });
 
