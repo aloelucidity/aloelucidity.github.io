@@ -28,8 +28,8 @@ def build_site():
             current_header = header
             current_header = current_header.replace("<title></title>", f"<title>{title}</title>")
             
-            target_link = f'href="{active_file}"'
-            replacement_link = f'class="current" href="{active_file}"'
+            target_link = f'class="nav-button" href="{active_file}"'
+            replacement_link = f'class="nav-button current" href="{active_file}"'
             current_header = current_header.replace(target_link, replacement_link)
 
             with open(os.path.join("pages", filename), "r", encoding="utf-8") as f:
