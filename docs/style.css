@@ -345,6 +345,9 @@ iframe {
     margin-left: auto;
     margin-right: auto;
     transition: all 0.3s ease;
+
+    background-image: linear-gradient(#ffffff80, #ffffff00);
+    text-shadow: 0.1rem 0.1rem 0.5rem #ffffff80, 0.1rem 0.1rem 0.15rem #03011680;
 }
 
 .game-container label:hover {
