@@ -402,6 +402,8 @@ iframe {
 
 .game-metadata-container h3 {
     margin-bottom: 0.1rem;
+    background-image: linear-gradient(#ffffff80, #ffffff00);
+    text-shadow: 0.1rem 0.1rem 0.5rem #ffffff80, 0.1rem 0.1rem 0.15rem #03011680;
 }
 
 .game-127 {
