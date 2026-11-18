@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioElement.play().catch(() => {});
     }
 
-    document.querySelectorAll('a, button, img:not(.logo), .close-button, .show-more-button').forEach(element => {
+    document.querySelectorAll('a, button, img:not(.logo), .close-button, label').forEach(element => {
     element.addEventListener('mouseenter', () => {
         playSound(hoverSound);
     });
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.querySelectorAll('.show-more-button').forEach(btn => {
+    document.querySelectorAll('.game-show-input').forEach(btn => {
         btn.addEventListener('click', () => {
             playSound(mouseClickSound);
         });
