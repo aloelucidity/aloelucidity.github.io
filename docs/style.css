@@ -179,7 +179,7 @@ ul li {
 }
 
 /* Content */
-.content, .modal-content {
+.content, .modal-content, .typo-modal-content {
     display: flex;
     flex-direction: column;
 
@@ -619,7 +619,7 @@ iframe {
 .typo-tracker {
     background-color: #000000ff;
     background:
-        linear-gradient(#000000 0%, #13313a 100%),
+        linear-gradient(#000000 0%, #131d3a 100%),
         repeating-linear-gradient(#ffffff40, #ffffff40 1rem, #aacccc10 1rem, #aacccc10 1.375rem);
     background-blend-mode: multiply;
 
@@ -648,6 +648,7 @@ iframe {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
+    padding: 0.5rem;
 }
 
 .typo-column {
@@ -660,6 +661,26 @@ iframe {
     font-family: 'Fontdiner Swanky';
     font-weight: 400;
     font-size: 1.25rem;
+}
+
+.typo-hint {
+    margin-left: auto;
+}
+
+.typo-modal-content {
+    width: auto;
+    height: auto;
+    min-width: 0;
+
+    padding: 1.5rem;
+    position: relative;
+
+    transform: translateY(2rem) scale(0.75) rotate(5deg);
+    transition: transform 0.25s ease-out;
+}
+
+.modal.active .typo-modal-content {
+    transform: translateY(0) scale(1) rotate(0);
 }
 
 

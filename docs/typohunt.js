@@ -1,5 +1,7 @@
 // helpers!!
 
+import { WORDS } from './words.js';
+
 function getDailySeed() {
     const d = new Date();
     const dateString = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
@@ -27,13 +29,59 @@ function formatTime(totalSeconds) {
     return `${minutes}:${secsStr}s`;
 }
 
-const DAILY_WORDS = [
-    "mario", "luigi", "wario", "yoshi",
-];
+function remToPx(rem) {
+    const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    return rem * rootFontSize;
+}
 
 // the game . which you just LOST! mwahwahahaha im so evil
 
+function updateHint() {
+    const hintText = document.querySelector('.typo-hint');
+    if (!hintText) return;
+
+    const activeTypos = document.querySelectorAll('.typo[data-scrambled="true"]');
+    
+    if (activeTypos.length === 0) {
+        return;
+    }
+
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    let closestTypo = null;
+    let minDistance = Infinity;
+
+    activeTypos.forEach(typo => {
+        const rect = typo.getBoundingClientRect();
+        const typoCenterX = rect.left + rect.width / 2;
+        const typoCenterY = rect.top + rect.height / 2;
+
+        const distance = Math.hypot(typoCenterX - centerX, typoCenterY - centerY);
+
+        if (distance < minDistance) {
+            minDistance = distance;
+            closestTypo = { rect, typoCenterX, typoCenterY };
+        }
+    });
+
+    const THRESHOLD_PX = remToPx(50);
+    if (minDistance <= THRESHOLD_PX) {
+        hintText.textContent = "typo nearby!";
+    } else {
+        if (closestTypo.typoCenterY > centerY) {
+            hintText.textContent = "too high!";
+        } else {
+            hintText.textContent = "too low!";
+        }
+    }
+}
+
 function initGame() {
+    const seed = getDailySeed();
+    const rng = random(seed);
+    const randomWord = WORDS[Math.floor(rng() * WORDS.length)];
+
     const containers = document.querySelectorAll('.typo-text');
     const charElements = [];
     let globalIndex = 0;
@@ -66,10 +114,14 @@ function initGame() {
         });
     });
 
-    const seed = getDailySeed();
-    const rng = random(seed);
+    // to stop the algorithm from making a "typo" by replacing a character
+    // with an identical character, it can't pick letters that exist in the selected word
+    // this makes the game easier but eh i think thats a good thing tbh
+    const validElements = charElements.filter(item => {
+        return !randomWord.includes(item.element.dataset.original.toLowerCase());
+    });
 
-    const shuffled = [...charElements];
+    const shuffled = [...validElements];
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(rng() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -79,21 +131,20 @@ function initGame() {
     chosenTypos.sort((a, b) => a.originalIndex - b.originalIndex);
 
     const startTime = performance.now();
-    const mainTimerEl = document.querySelector('.typo-timer');
+    const mainTimerText = document.querySelector('.typo-timer');
     const columns = document.querySelectorAll('.typo-column');
     
     let foundCount = 0;
 
     const timerInterval = setInterval(() => {
         const elapsedSeconds = (performance.now() - startTime) / 1000;
-        if (mainTimerEl) {
-            mainTimerEl.textContent = `time - ${formatTime(elapsedSeconds)}`;
-        }
+        mainTimerText.textContent = `time - ${formatTime(elapsedSeconds)}`;
+        updateHint();
     }, 50);
-
+    
     chosenTypos.forEach((item, slotIndex) => {
         const originalChar = item.element.dataset.original;
-        const scrambledChar = getScrambledChar(originalChar, rng);
+        const scrambledChar = randomWord[slotIndex];
         
         item.element.textContent = scrambledChar;
         item.element.dataset.scrambled = "true";
@@ -117,7 +168,11 @@ function initGame() {
                 foundCount++;
                 if (foundCount === 5) {
                     clearInterval(timerInterval);
-                    console.log("congrats, you won ! !!11 1!");
+
+                    mainTimerText.textContent = `time - ${formatTime(elapsedSeconds)}`;
+
+                    const hintText = document.querySelector('.typo-hint');
+                    hintText.textContent = 'congrats ^^';
                 }
             }
         });
