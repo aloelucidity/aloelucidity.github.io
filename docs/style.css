@@ -940,9 +940,9 @@ img:active:not(.logo) {
     }
 
     /* Games */
-    .game-thumb {
+    .game-container .game-thumb {
         height: auto;
-        width: 100%;
+        width: 99%;
     }
 
     /* Misc */
