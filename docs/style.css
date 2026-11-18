@@ -445,6 +445,69 @@ iframe {
     margin-bottom: 0;
 }
 
+.game-button {
+    /* Sizing */
+    white-space: nowrap;
+    min-height: 3rem;
+
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+
+    /* Background */
+    background-color: #808080;
+    background: 
+        linear-gradient(#ffffff80 0%, #ffffff40 45%, #ffffff20 50%, #ffffff00 85%);
+    background-blend-mode: multiply;
+
+    outline-style: groove;
+    outline-width: 0.25rem;
+    outline-color: #ffffff40;
+    outline-offset: -0.1rem;
+
+    /* Text */
+    font-family: 'Fontdiner Swanky';
+    font-weight: 400;
+    font-size: 1.5rem;
+
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 
+        0 0 1rem #03011630, 0.2rem 0.25rem 0.05rem #4e4d5e60;
+
+    color: white;
+    user-select: none;
+
+    transition: all 0.3s ease;
+}
+
+.game-button:hover {
+    text-shadow: 
+        0 0 3rem #03011630, 0.2rem 0.25rem 0.15rem #4e4d5e60;
+
+    font-size: 1.65rem;
+}
+
+.game-button:active {
+    text-shadow: 
+        /* Outline */
+        -0.1rem -0.1rem 0 #ffffff20,
+        0   -0.1rem 0 #ffffff20,
+        0.1rem -0.1rem 0 #ffffff20,
+        0.1rem  0   0 #ffffff20,
+        0.1rem  0.1rem 0 #ffffff20,
+        0    0.1rem 0 #ffffff20,
+        -0.1rem  0.1rem 0 #ffffff20,
+        -0.1rem  0   0 #ffffff20,
+        /* Other */
+        0 0 3rem #03011630, 0.2rem 0.25rem 0.15rem #4e4d5e60;
+
+    font-size: 1.5rem;
+    color: #ffffff;
+    transition: all 0.05s ease;
+}
+
 .game-container h1, .game-metadata-container h3 {
     text-shadow: 0.1rem 0.1rem 0.15rem #03011680;
 }
