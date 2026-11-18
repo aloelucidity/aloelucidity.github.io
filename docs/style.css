@@ -363,6 +363,11 @@ iframe {
     filter: brightness(125%) saturate(150%);
 }
 
+.game-container hr {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .game-show-input {
     display: none;
 }
@@ -591,20 +596,70 @@ iframe {
     margin-bottom: 0;
 }
 
-.game-container hr {
-    color: #ffffff80;
-    width: 100%;
-    stroke-width: 0.1rem;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
 .show-more-button {
     cursor: pointer;
 }
 
 .games-category-separator {
     margin-bottom: 3.5rem;
+}
+
+/* Typo Hunt */
+.typo {
+    font-weight: bold;
+    cursor: pointer;
+    filter: contrast(200%);
+    transition: all 0.3s ease;
+}
+
+.typo:hover {
+    color: #27bf52;
+}
+
+.typo-tracker {
+    background-color: #000000ff;
+    background:
+        linear-gradient(#000000 0%, #13313a 100%),
+        repeating-linear-gradient(#ffffff40, #ffffff40 1rem, #aacccc10 1rem, #aacccc10 1.375rem);
+    background-blend-mode: multiply;
+
+    outline-style: outset;
+    outline-width: 0.25rem;
+    outline-color: #ffffff40;
+    outline-offset: -0.1rem;
+
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+
+    left: 50%;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+
+    padding: 0.5rem;
+    z-index: 50;
+
+    color: white;
+    text-shadow: 0.1rem 0.1rem 0.15rem #03011680;
+    text-align: center;
+}
+
+.typo-score {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.typo-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 4rem;
+}
+
+.typo-char {
+    font-family: 'Fontdiner Swanky';
+    font-weight: 400;
+    font-size: 1.25rem;
 }
 
 
@@ -711,6 +766,12 @@ h1, h2, h3, h4, label {
     background-size: cover;
     background-clip: text;
     -webkit-background-clip: text;
+}
+
+hr {
+    color: #ffffff80;
+    width: 100%;
+    stroke-width: 0.1rem;
 }
 
 /* Animated links */ 
