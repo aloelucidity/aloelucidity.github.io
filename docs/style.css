@@ -133,6 +133,8 @@ ul li {
 
     -webkit-user-select: none;
     user-select: none;
+
+    cursor: pointer;
 }
 
 .nav-button:hover, .sound-toggle:hover, .close-button:hover {
@@ -616,7 +618,7 @@ iframe {
     color: #27bf52;
 }
 
-.typo-tracker {
+.typo-tracker, .typo-results-tracker {
     background-color: #000000ff;
     background:
         linear-gradient(#000000 0%, #131d3a 100%),
@@ -628,22 +630,24 @@ iframe {
     outline-color: #ffffff40;
     outline-offset: -0.1rem;
 
-    position: fixed;
     display: flex;
     flex-direction: column;
+    padding: 0.5rem;
+
+    color: white;
+    text-shadow: 0.1rem 0.1rem 0.15rem #a39ce0a0;
+    text-align: center;
+}
+
+.typo-tracker {
+    position: fixed;
+    z-index: 50;
 
     visibility: hidden;
     transform: translateX(-50%) translateY(105%) rotate(5deg);
     bottom: 0;
     left: 50%;
-
-    padding: 0.5rem;
-    z-index: 50;
-
-    color: white;
-    text-shadow: 0.1rem 0.1rem 0.15rem #03011680;
-    text-align: center;
-
+    
     transition: all 0.4s ease;
 }
 
@@ -658,6 +662,7 @@ iframe {
     flex-direction: row;
     gap: 0.5rem;
     padding: 0.5rem;
+    justify-content: center;
 }
 
 .typo-column {
@@ -666,7 +671,7 @@ iframe {
     min-width: 4rem;
 }
 
-.typo-char {
+.typo-char, .typo-results-char {
     font-family: 'Fontdiner Swanky';
     font-weight: 400;
     font-size: 1.25rem;
@@ -690,6 +695,17 @@ iframe {
 
 .modal.active .typo-modal-content {
     transform: translateY(0) scale(1) rotate(0);
+}
+
+.typo-results-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.typo-results-timer {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 

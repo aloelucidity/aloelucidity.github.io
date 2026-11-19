@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
         audioElement.play().catch(() => {});
     }
 
-    document.querySelectorAll('a, button, img:not(.logo), .close-button, label').forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        playSound(hoverSound);
-    });
+    document.querySelectorAll('a, button, img:not(.logo), .close-button, .nav-button, label').forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            playSound(hoverSound);
+        });
     });
 
     document.querySelectorAll('a').forEach(link => {

@@ -39,6 +39,10 @@ function remToPx(rem) {
 const modal = document.getElementById('typo-modal');
 const closeButton = document.getElementById('typo-close');
 const acceptButton = document.getElementById('typo-accept');
+
+const resultsModal = document.getElementById('typo-results-modal');
+const resultsCloseButton = document.getElementById('typo-results-close');
+
 const typoTracker = document.getElementById('typo-tracker');
 
 closeButton.onclick = () => {
@@ -48,6 +52,9 @@ acceptButton.onclick = () => {
     modal.classList.remove('active');
     initGame();
     typoTracker.classList.add('active')
+}
+resultsCloseButton.onclick = () => {
+    resultsModal.classList.remove('active');
 }
 
 // the game . which you just LOST! mwahwahahaha im so evil
