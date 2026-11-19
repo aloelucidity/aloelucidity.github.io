@@ -618,6 +618,11 @@ iframe {
     color: #27bf52;
 }
 
+.typo-text.playing {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 .typo-tracker, .typo-results-tracker {
     background-color: #000000ff;
     background:

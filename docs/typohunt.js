@@ -29,6 +29,17 @@ function formatTime(totalSeconds) {
     return `${minutes}:${secsStr}s`;
 }
 
+const MONTHS_SHORT = [
+  "jan.", "feb.", "mar.", "apr.", "may", "june",
+  "july", "aug.", "sep.", "oct.", "nov.", "dec."
+];
+function formatDate(date = new Date()) {
+  const month = MONTHS_SHORT[date.getMonth()];
+  const day = date.getDate();
+  const year = date.getFullYear();
+  return `${month} ${day} ${year}`;
+}
+
 function remToPx(rem) {
     const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
     return rem * rootFontSize;
@@ -44,6 +55,7 @@ const acceptButton = document.getElementById('typo-accept');
 
 const resultsModal = document.getElementById('typo-results-modal');
 const resultsCloseButton = document.getElementById('typo-results-close');
+const resultsCopyButton = document.getElementById('typo-results-copy');
 
 const typoTracker = document.getElementById('typo-tracker');
 
@@ -69,14 +81,27 @@ resultsCloseButton.onclick = () => {
     resultsModal.classList.remove('active');
     typoStartButton.classList.remove('hidden');
 }
+resultsCopyButton.onclick = () => {
+    navigator.clipboard.writeText(getShareText(
+        savedTimes,
+        finalTime,
+        curStreak,
+        startDate
+    ));
+}
 
 // the game . which you just LOST! mwahwahahaha im so evil
 
 let isWon = false;
-let savedTimes = {};
+
 let seed = getDailySeed();
 let rng = random(seed);
 let randomWord = WORDS[Math.floor(rng() * WORDS.length)];
+
+let savedTimes = {};
+let finalTime = 0;
+let curStreak = 0;
+let startDate;
 
 function updateHint() {
     const hintText = document.querySelector('.typo-hint');
@@ -125,15 +150,18 @@ function initGame() {
     const containers = document.querySelectorAll('.typo-text');
     const charElements = [];
     let globalIndex = 0;
+    startDate = new Date();
 
     containers.forEach(container => {
         const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
         const textNodes = [];
         
+        container.classList.add('playing');
+
         while (walker.nextNode()) {
             textNodes.push(walker.currentNode);
         }
-
+        
         textNodes.forEach(textNode => {
             const text = textNode.nodeValue;
             const fragment = document.createDocumentFragment();
@@ -210,18 +238,20 @@ function initGame() {
                 foundCount++;
                 if (foundCount === 5) {
                     clearInterval(timerInterval);
-                    winGame(elapsedSeconds);
+                    finalTime = elapsedSeconds;
+                    curStreak++;
+                    winGame();
                 }
             }
         });
     });
 }
 
-function winGame(elapsedSeconds) {
+function winGame() {
     isWon = true;
 
     const mainTimerText = document.querySelector('.typo-timer');
-    mainTimerText.textContent = `time - ${formatTime(elapsedSeconds)}`;
+    mainTimerText.textContent = `time - ${formatTime(finalTime)}`;
 
     const hintText = document.querySelector('.typo-hint');
     hintText.textContent = 'congrats ^^';
@@ -231,7 +261,7 @@ function winGame(elapsedSeconds) {
 
     const resultsTimerText = document.querySelector('.typo-results-timer');
     const resultsColumns = document.querySelectorAll('.typo-results-column');
-    resultsTimerText.textContent = `total time - ${formatTime(elapsedSeconds)}`;
+    resultsTimerText.textContent = `total time - ${formatTime(finalTime)}`;
 
     for (let slotIndex = 0; slotIndex < 5; slotIndex++) {
         const scrambledChar = randomWord[slotIndex];
@@ -243,4 +273,46 @@ function winGame(elapsedSeconds) {
             if (timeDiv) timeDiv.textContent = formatTime(savedTimes[slotIndex]);
         }
     }
+
+    document.querySelectorAll('.typo-text.playing').forEach(c => c.classList.remove('playing'));
+}
+
+// sharing is caring
+
+const CHAR_EMOJIS = ["🟥", "🟧", "🟨", "🟩", "🟦"];
+
+function getShareText(
+  times,
+  totalElapsedSeconds,
+  streakDays,
+  date = new Date()
+) {
+    const entries = Object.entries(times).map(([key, timeSeconds]) => ({
+        slotIndex: Number(key),
+        timeSeconds,
+    }));
+
+    entries.sort((a, b) => a.timeSeconds - b.timeSeconds);
+    const withEmoji = entries.map((entry, foundIndex) => ({
+        ...entry,
+        emoji: CHAR_EMOJIS[foundIndex],
+    }));
+
+    withEmoji.sort((a, b) => a.slotIndex - b.slotIndex);
+    const lines = withEmoji.map(
+        ({ emoji, timeSeconds }) => `${emoji} ${formatTime(timeSeconds)}`
+    );
+
+    const dateStr = formatDate(date);
+    const timeStr = formatTime(totalElapsedSeconds);
+    const dayWord = streakDays === 1 ? "day" : "days";
+
+    return [
+        `typo hunt - ${dateStr}`,
+        "",
+        ...lines,
+        "",
+        `⌛ ${timeStr} - 💫 ${streakDays} ${dayWord}`,
+        "https://aloelucidity.com/games",
+    ].join("\n");
 }
