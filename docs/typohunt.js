@@ -34,6 +34,22 @@ function remToPx(rem) {
     return rem * rootFontSize;
 }
 
+// popup stuff and things
+
+const modal = document.getElementById('typo-modal');
+const closeButton = document.getElementById('typo-close');
+const acceptButton = document.getElementById('typo-accept');
+const typoTracker = document.getElementById('typo-tracker');
+
+closeButton.onclick = () => {
+    modal.classList.remove('active');
+}
+acceptButton.onclick = () => {
+    modal.classList.remove('active');
+    initGame();
+    typoTracker.classList.add('active')
+}
+
 // the game . which you just LOST! mwahwahahaha im so evil
 
 function updateHint() {
@@ -178,5 +194,3 @@ function initGame() {
         });
     });
 }
-
-initGame();

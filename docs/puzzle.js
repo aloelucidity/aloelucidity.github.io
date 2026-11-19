@@ -2,7 +2,7 @@ const modal = document.getElementById('puzzle-modal');
 const board = document.getElementById('puzzle-board');
 const puzzleScore = document.getElementById('puzzle-score');
 const puzzleBest = document.getElementById('puzzle-best');
-const closeButton = document.querySelector('.close-button');
+const closeButton = document.getElementById('puzzle-close');
 
 const size = 3;
 const totalTiles = size * size;

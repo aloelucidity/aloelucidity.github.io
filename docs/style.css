@@ -632,9 +632,10 @@ iframe {
     display: flex;
     flex-direction: column;
 
+    visibility: hidden;
+    transform: translateX(-50%) translateY(105%) rotate(5deg);
+    bottom: 0;
     left: 50%;
-    bottom: calc(20px + env(safe-area-inset-bottom));
-    transform: translateX(-50%);
 
     padding: 0.5rem;
     z-index: 50;
@@ -642,6 +643,14 @@ iframe {
     color: white;
     text-shadow: 0.1rem 0.1rem 0.15rem #03011680;
     text-align: center;
+
+    transition: all 0.4s ease;
+}
+
+.typo-tracker.active {
+    visibility: visible;
+    transform: translateX(-50%);
+    bottom: calc(20px + env(safe-area-inset-bottom));
 }
 
 .typo-score {

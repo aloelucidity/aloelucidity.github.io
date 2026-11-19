@@ -1,6 +1,6 @@
         <script type="module" src="typohunt.js" defer></script>
 
-        <div id="typo-modal" class="modal active">
+        <div id="typo-modal" class="modal">
             <div class="typo-modal-content">
                 <h2>typo hunt!</h2>
                 <p>
@@ -16,13 +16,13 @@
                     anyways, these typos are really bugging me. mind helping a catboy out?
                 </p>
                 <div class="modal-top">
-                    <span class="close-button">sure!</span>
-                    <span class="close-button">nah</span>
+                    <span id="typo-accept" class="close-button">sure!</span>
+                    <span id="typo-close" class="close-button">nah</span>
                 </div>
             </div>
         </div>
 
-        <div class="typo-tracker">
+        <div id="typo-tracker" class="typo-tracker">
             <div class="typo-score">
                 <div class="typo-column">
                     <div class="typo-char">_</div>
