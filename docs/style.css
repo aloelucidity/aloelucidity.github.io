@@ -1016,7 +1016,7 @@ img:active:not(.logo) {
         font-size: 12px;
     }
 
-    p, h1, h2:not(.score-container h2), h3, h4, label {
+    p, h1, h2:not(.score-container h2, .typo-results-title h2), h3, h4, label {
         text-align: center;
         margin-left: auto;
         margin-right: auto;
@@ -1087,6 +1087,16 @@ img:active:not(.logo) {
     .game-container .game-thumb {
         height: auto;
         width: 99%;
+    }
+
+    .text-typo-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-content, .typo-modal-content {
+        width: 80vw;
+        max-width: 30rem;
     }
 
     /* Misc */
