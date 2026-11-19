@@ -36,6 +36,8 @@ function remToPx(rem) {
 
 // popup stuff and things
 
+const typoStartButton = document.getElementById("typo-start-button");
+
 const modal = document.getElementById('typo-modal');
 const closeButton = document.getElementById('typo-close');
 const acceptButton = document.getElementById('typo-accept');
@@ -45,8 +47,18 @@ const resultsCloseButton = document.getElementById('typo-results-close');
 
 const typoTracker = document.getElementById('typo-tracker');
 
+typoStartButton.onclick = () => {
+    if (!isWon) {
+        modal.classList.add('active');
+    }
+    else {
+        resultsModal.classList.add('active');
+    }
+    typoStartButton.classList.add('hidden');
+}
 closeButton.onclick = () => {
     modal.classList.remove('active');
+    typoStartButton.classList.remove('hidden');
 }
 acceptButton.onclick = () => {
     modal.classList.remove('active');
@@ -55,9 +67,16 @@ acceptButton.onclick = () => {
 }
 resultsCloseButton.onclick = () => {
     resultsModal.classList.remove('active');
+    typoStartButton.classList.remove('hidden');
 }
 
 // the game . which you just LOST! mwahwahahaha im so evil
+
+let isWon = false;
+let savedTimes = {};
+let seed = getDailySeed();
+let rng = random(seed);
+let randomWord = WORDS[Math.floor(rng() * WORDS.length)];
 
 function updateHint() {
     const hintText = document.querySelector('.typo-hint');
@@ -101,10 +120,8 @@ function updateHint() {
 }
 
 function initGame() {
-    const seed = getDailySeed();
-    const rng = random(seed);
-    const randomWord = WORDS[Math.floor(rng() * WORDS.length)];
-
+    rng = random(seed);
+    
     const containers = document.querySelectorAll('.typo-text');
     const charElements = [];
     let globalIndex = 0;
@@ -186,18 +203,44 @@ function initGame() {
                     
                     if (charDiv) charDiv.textContent = scrambledChar;
                     if (timeDiv) timeDiv.textContent = formatTime(elapsedSeconds);
+                    
+                    savedTimes[slotIndex] = elapsedSeconds;
                 }
 
                 foundCount++;
                 if (foundCount === 5) {
                     clearInterval(timerInterval);
-
-                    mainTimerText.textContent = `time - ${formatTime(elapsedSeconds)}`;
-
-                    const hintText = document.querySelector('.typo-hint');
-                    hintText.textContent = 'congrats ^^';
+                    winGame(elapsedSeconds);
                 }
             }
         });
     });
+}
+
+function winGame(elapsedSeconds) {
+    isWon = true;
+
+    const mainTimerText = document.querySelector('.typo-timer');
+    mainTimerText.textContent = `time - ${formatTime(elapsedSeconds)}`;
+
+    const hintText = document.querySelector('.typo-hint');
+    hintText.textContent = 'congrats ^^';
+
+    resultsModal.classList.add('active');
+    typoTracker.classList.remove('active');
+
+    const resultsTimerText = document.querySelector('.typo-results-timer');
+    const resultsColumns = document.querySelectorAll('.typo-results-column');
+    resultsTimerText.textContent = `total time - ${formatTime(elapsedSeconds)}`;
+
+    for (let slotIndex = 0; slotIndex < 5; slotIndex++) {
+        const scrambledChar = randomWord[slotIndex];
+        if (resultsColumns[slotIndex]) {
+            const charDiv = resultsColumns[slotIndex].querySelector('.typo-results-char');
+            const timeDiv = resultsColumns[slotIndex].querySelector('.typo-results-time');
+            
+            if (charDiv) charDiv.textContent = scrambledChar;
+            if (timeDiv) timeDiv.textContent = formatTime(savedTimes[slotIndex]);
+        }
+    }
 }

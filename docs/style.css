@@ -4,7 +4,7 @@
     font-family: 'Fontdiner Swanky';
     font-style: normal;
     font-weight: 400;
-    src: url('assets/fontdiner-swanky-v24-latin-regular.woff2') format('woff2');
+    src: url('assets/global/fontdiner-swanky-v24-latin-regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -12,7 +12,7 @@
     font-family: 'Zen Antique Soft';
     font-style: normal;
     font-weight: 400;
-    src: url('assets/zen-antique-soft-v14-latin-regular.woff2') format('woff2');
+    src: url('assets/global/zen-antique-soft-v14-latin-regular.woff2') format('woff2');
 }
 
 
@@ -28,9 +28,9 @@ body::before {
 
     background-color: #0e688e;
     background:
-        url("assets/noise.png") left top / 80rem 45rem repeat,
-        url("assets/stars.png") left top / 4rem 4rem repeat,
-        url("assets/background.png") left top / 100% 100% no-repeat;
+        url("assets/global/noise.png") left top / 80rem 45rem repeat,
+        url("assets/global/stars.png") left top / 4rem 4rem repeat,
+        url("assets/global/background.png") left top / 100% 100% no-repeat;
     background-blend-mode: color-dodge, screen, normal;
     animation: scroll 120s linear infinite;
 }
@@ -129,7 +129,7 @@ ul li {
     0 0 1rem #298ba3, 0.2rem 0.25rem 0.05rem #7e77d4a0;
 
     color: white;
-    transition: all 0.3s ease;
+    transition: text-shadow 0.3s ease, font-size 0.3s ease;
 
     -webkit-user-select: none;
     user-select: none;
@@ -157,7 +157,7 @@ ul li {
 .nav-button:active, .sound-toggle:active, .close-button:active {
     font-size: 1.5rem;
     color: #9cebb4;
-    transition: all 0.05s ease;
+    transition: text-shadow 0.05s ease, font-size 0.05s ease;
 }
 
 .current {
@@ -231,7 +231,7 @@ ul li {
 .clickable-luci {
     border: none;
     background: none;
-    background-image: url("assets/luci-idle.gif");
+    background-image: url("assets/home/luci-idle.gif");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -242,7 +242,7 @@ ul li {
 
     image-rendering: pixelated;
     filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
-    transition: all 0.05s ease;
+    transition: transform 0.05s ease, filter 0.05s ease;
 
     cursor: pointer;
     touch-action: manipulation;
@@ -250,15 +250,15 @@ ul li {
 
 .clickable-luci:hover {
     transform: translateY(-0.25rem);
-    transition: all 0.1s ease-in;
+    transition: transform 0.1s ease-in, filter 0.1s ease-in;
     
     filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
 }
 
 .clickable-luci:active {
-    background-image: url("assets/luci-pose.gif");
+    background-image: url("assets/home/luci-pose.gif");
     transform: translateY(-0.75rem) scale(1.025);
-    transition: all 0s ease;
+    transition: transform 0s ease, filter 0s ease;
 }
 
 @keyframes bounce {
@@ -346,7 +346,7 @@ iframe {
     font-weight: bold;
     margin-left: auto;
     margin-right: auto;
-    transition: all 0.3s ease;
+    transition: font-weight 0.3s ease, transform 0.3s ease, filter 0.3s ease;
 
     background-image: linear-gradient(#ffffff80, #ffffff00);
     text-shadow: 0.1rem 0.1rem 0.5rem #ffffff80, 0.1rem 0.1rem 0.15rem #03011680;
@@ -361,7 +361,7 @@ iframe {
 .game-container label:active {
     font-weight: 1200;
     transform: scale(1.2);
-    transition: all 0.05s ease;
+    transition: font-weight 0.05s ease, transform 0.05s ease, filter 0.05s ease;
     filter: brightness(125%) saturate(150%);
 }
 
@@ -416,7 +416,7 @@ iframe {
 .game-127 {
     background: 
         linear-gradient(#08002680 0%, #2f59bd80 100%),
-        url(assets/games/127bg.gif);
+        url("assets/games/127bg.gif");
 }
 
 .game-63 {
@@ -449,7 +449,7 @@ iframe {
 .game-udx {
     background-image: 
         linear-gradient(#00000000, #00000080 50%),
-        url(assets/games/udxbg.png);
+        url("assets/games/udxbg.png");
     background-size: 100%, 1.8rem 1.8rem;
     image-rendering: pixelated;
 }
@@ -457,7 +457,7 @@ iframe {
 .game-kinetiball {
     background: 
         linear-gradient(#0e9b5580 0%, #00000080 50%, #00000060 100%),
-        url(assets/games/kinetibg.png);
+        url("assets/games/kinetibg.png");
 }
 
 .game-ud {
@@ -470,7 +470,7 @@ iframe {
 .game-smb1r {
     background-image: 
         linear-gradient(#00000000, #00000080 50%),
-        url(assets/games/smb1rbg.png);
+        url("assets/games/smb1rbg.png");
     background-size: 100%, 1.8rem 1.8rem;
     image-rendering: pixelated;
 }
@@ -478,13 +478,13 @@ iframe {
 .game-darius {
     background: 
         linear-gradient(#00008080 0%, #000020c0 100%),
-        url(assets/games/dariusbg.png);
+        url("assets/games/dariusbg.png");
 }
 
 .game-facsimile {
     background-image: 
         linear-gradient(45deg, #b73c4e, #51588c 20%, #cba3ff 50%, #b73c4e 80%),
-        url(assets/games/facsimilebg.png);
+        url("assets/games/facsimilebg.png");
     background-blend-mode: multiply;
     background-size: 100%;
 }
@@ -558,7 +558,7 @@ iframe {
     -webkit-user-select: none;
     user-select: none;
 
-    transition: all 0.3s ease;
+    transition: font-size 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
 }
 
 .game-button:hover {
@@ -584,7 +584,7 @@ iframe {
 
     font-size: 1.5rem;
     color: #ffffff;
-    transition: all 0.05s ease;
+    transition: font-size 0.05s ease, text-shadow 0.05s ease, color 0.05s ease;
 }
 
 .game-container h1, .game-metadata-container h3 {
@@ -611,7 +611,7 @@ iframe {
     font-weight: bold;
     cursor: pointer;
     filter: contrast(200%);
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .typo:hover {
@@ -648,7 +648,7 @@ iframe {
     bottom: 0;
     left: 50%;
     
-    transition: all 0.4s ease;
+    transition: transform 0.4s ease, bottom 0.4s ease;
 }
 
 .typo-tracker.active {
@@ -665,7 +665,7 @@ iframe {
     justify-content: center;
 }
 
-.typo-column {
+.typo-column, .typo-results-column {
     display: flex;
     flex-direction: column;
     min-width: 4rem;
@@ -706,6 +706,39 @@ iframe {
 .typo-results-timer {
     margin-left: auto;
     margin-right: auto;
+}
+
+.typo-start-button {
+    border: none;
+    background: none;
+    background-image: url("assets/games/typo-hunt.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    height: 7em;
+    aspect-ratio: 1/1;
+    margin: 1rem;
+
+    image-rendering: pixelated;
+    filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
+    transition: transform 0.05s ease;
+
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.typo-start-button:hover:not(.clickable-luci) {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+.typo-start-button.hidden:not(.clickable-luci) {
+    transform: scale(0);
+}
+
+.text-typo-box {
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -822,7 +855,7 @@ hr {
 
 /* Animated links */ 
 a:not(ul li a) {
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, font-weight 0.3s ease;
 }
 
 a:not(ul li a):hover {
@@ -832,7 +865,7 @@ a:not(ul li a):hover {
 
 a:not(ul li a):active {
     transform: scale(1.3);
-    transition: all 0.05s ease;
+    transition: transform 0.05s ease, font-weight 0.05s ease;
 }
 
 html, body {
@@ -870,7 +903,7 @@ button:not(.clickable-luci):active {
 }
 
 img:not(.logo) {
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, visibility 0.3s ease;
 }
 
 img:hover:not(.logo) {
@@ -879,7 +912,7 @@ img:hover:not(.logo) {
 
 img:active:not(.logo) {
     transform: scale(1.15);
-    transition: all 0.05s ease;
+    transition: transform 0.05s ease, visibility 0.05s ease;
 }
 
 .modal {
@@ -946,7 +979,7 @@ img:active:not(.logo) {
         linear-gradient(in hsl longer hue 45deg, rgb(192, 48, 48) 0 100%);
     background-size: cover;
     aspect-ratio: var(--aspect-ratio, 1 / 1);
-    transition: all 0.4s ease;
+    transition: gap 0.4s ease;
 
     width: auto;
     height: 30vw;
@@ -960,11 +993,10 @@ img:active:not(.logo) {
     background-size: 300% 300%;
     background-repeat: no-repeat;
     cursor: pointer;
-    transition: all 0.11s ease-out;
+    transition: transform 0.11s ease-out, scale 0.11s ease-out, opacity 0.5s ease;
     transform: scale(1.0);
 }
 .puzzle-tile:hover:not(#puzzle-board.won .puzzle-tile, .puzzle-tile.empty) {
-    opacity: 0.95;
     transform: scale(1.04);
 }
 
