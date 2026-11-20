@@ -316,3 +316,6 @@ function getShareText(
         "https://aloelucidity.com/games",
     ].join("\n");
 }
+
+// storage
+

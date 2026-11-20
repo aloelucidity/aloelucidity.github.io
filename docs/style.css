@@ -698,6 +698,10 @@ iframe {
     transition: transform 0.25s ease-out;
 }
 
+.typo-intro-text {
+    display: block;
+}
+
 .modal.active .typo-modal-content {
     transform: translateY(0) scale(1) rotate(0);
 }
@@ -746,6 +750,38 @@ iframe {
     flex-direction: row;
 }
 
+.pc-luci {
+    border: none;
+    background: none;
+    background-image: url("assets/games/luci-pc-idle.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    float: right;
+    height: 15rem;
+    margin: 1rem;
+    aspect-ratio: 2/3;
+
+    image-rendering: pixelated;
+    filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
+    transition: transform 0.05s ease, filter 0.05s ease;
+
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.pc-luci:hover {
+    transform: translateY(-0.25rem);
+    transition: transform 0.1s ease-in, filter 0.1s ease-in;
+    
+    filter: drop-shadow(0.1rem 0.2rem 0.05rem #00005240);
+}
+
+.pc-luci:active {
+    transform: translateY(-0.75rem) scale(1.025);
+    transition: transform 0s ease, filter 0s ease;
+}
 
 /* Footer */
 .padding {
