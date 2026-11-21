@@ -2,14 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const hoverSound = document.getElementById('hover-sound');
     const clickSound = document.getElementById('click-sound');
     const backSound = document.getElementById('back-sound');
+    
     const tileHoverSound = document.getElementById('tile-hover-sound');
     const mouseClickSound = document.getElementById('mouse-click-sound');
     const puzzleWinSound = document.getElementById('puzzle-win-sound');
+    
     const luciSound = document.getElementById('luci-sound');
-    const luciOwSound = document.getElementById('luci-ow-sound');
     const multUpSound = document.getElementById('mult-up-sound');
     const expUpSound = document.getElementById('exp-up-sound');
+
+    const luciOwSound = document.getElementById('luci-ow-sound');
     const toggleButton = document.getElementById('sound-toggle');
+
     let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
 
     // Update button text/state on load
@@ -95,6 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('puzzleWon', (event) => {
         playSound(puzzleWinSound);
+    });
+
+    window.addEventListener('typoFound', (event) => {
+        const typoSound = document.getElementById(`typo-${event.foundCount}-sound`);
+        playSound(typoSound);
     });
 
     document.querySelectorAll('.sound-toggle, .submit-button, img:not(.logo), .typo-start-button, .accept-button').forEach(btn => {

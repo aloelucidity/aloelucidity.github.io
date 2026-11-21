@@ -236,6 +236,11 @@ function initGame() {
                 }
 
                 foundCount++;
+                
+                const event = new CustomEvent("typoFound");
+                event.foundCount = foundCount;
+                window.dispatchEvent(event);
+
                 if (foundCount === 5) {
                     clearInterval(timerInterval);
                     finalTime = elapsedSeconds;
@@ -414,7 +419,7 @@ preloadPose.src = "assets/games/luci-pc-annoyed.png";
 
 function luciClicked(event) {
     luciClicks++;
-    if (luciClicks > 5) {
+    if (luciClicks >= 5) {
         if (convoIndex == 0) { 
             dialogueSizingText = luciDialogue.cloneNode(true);
             dialogueSizingText.id = "";
