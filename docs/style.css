@@ -832,7 +832,7 @@ iframe {
         repeating-conic-gradient(#00000000 0 25%, #00000015 0 50%) 50% / 3rem 3rem;
     mask: linear-gradient(transparent 0%, black 5%);
 
-    margin: 3rem -1rem 0 -1rem;
+    margin-top: 3rem;
     padding: 1rem;
     gap: 2rem;
 }
@@ -947,6 +947,10 @@ a:not(ul li a):active {
 
 html, body {
     height: 100%;
+}
+
+body {
+    margin: 0;
 }
 
 .site {
@@ -1115,7 +1119,6 @@ img:active:not(.logo) {
         min-width: 0;
     }
     body .footer {
-        width: 100%;
         min-width: 0;
         flex-direction: column;
         padding-top: 2rem;
