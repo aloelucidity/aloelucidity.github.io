@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mouseClickSound = document.getElementById('mouse-click-sound');
     const puzzleWinSound = document.getElementById('puzzle-win-sound');
     const luciSound = document.getElementById('luci-sound');
+    const luciOwSound = document.getElementById('luci-ow-sound');
     const multUpSound = document.getElementById('mult-up-sound');
     const expUpSound = document.getElementById('exp-up-sound');
     const toggleButton = document.getElementById('sound-toggle');
@@ -58,8 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const luci = document.getElementById("clickable-luci");
     if (luci) {
-        luci.addEventListener('click', () => {
+        luci.addEventListener('mousedown', () => {
             playSound(luciSound);
+        })
+    }
+
+    const pcLuci = document.getElementById("pc-luci");
+    if (pcLuci) {
+        pcLuci.addEventListener('mousedown', () => {
+            playSound(luciOwSound);
         })
     }
 
@@ -83,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playSound(puzzleWinSound);
     });
 
-    document.querySelectorAll('.sound-toggle, .submit-button, img:not(.logo)').forEach(btn => {
+    document.querySelectorAll('.sound-toggle, .submit-button, img:not(.logo), .typo-start-button, .accept-button').forEach(btn => {
         btn.addEventListener('click', () => {
             playSound(clickSound);
         });

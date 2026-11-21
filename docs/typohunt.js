@@ -319,3 +319,137 @@ function getShareText(
 
 // storage
 
+// bullying simulator
+
+let luciClicks = 0;
+let convoIndex = 0;
+let rickRolled = false;
+
+const DIALOGUE = [
+    `hey! cut it out, that's not funny >:(`,
+
+    `seriously, this isn't how you treat the creator of the site.`,
+
+    `you can just click "nah" if you don't want to do it. this isn't necessary!!`,
+
+    `please, stop!! what did i do to deserve this? no, soliciting free labor doesn't count.`,
+
+    `okay, okay! i yield!!
+        this was supposed to be a secret, but today's word is "${randomWord}"
+        now please leave me be ^^;`,
+
+    `i don't have any more hints. i gave you everything i know...
+        there's nothing more for you to gain by doing this-`,
+    
+    `agh, stop it >.<
+        i think this goes against the Geneva Convention...`,
+
+    `surely you have something better to do with all this time?`,
+
+    `like, instead of clicking me, you could sign up for my mailing list instead!
+        reading my mail is the most productive thing you can do :)`,
+
+    `ow, okay, you don't like self-promotion i get it. i'll stop.`,
+
+    `well, if you really want to keep clicking me...
+        you can press alt+f4 to increase your clicking speed.`,
+
+    `...what do you mean that's the oldest trick in the book?`,
+
+    `why do you want to get on my bad side? i run the site!!
+        i could make all the slide puzzles impossible to beat! you wouldn't like that would you huh?`,
+
+    `i bet an ai told you to click me.
+        yeah that's right, clicking me means you're an accomplice to the robot uprising. how could you.`,
+
+    `stop clicking me or else i will transfrom in to my dinosaur mode`,
+
+    `you know, i've heard of a guy in a computer that got superpowers...
+        and destroyed the computer with fireballs because of this treatment.
+        what if i did that, huh? i bet you'd be sorry.`,
+
+    `i'll have you know i'm top of my class in the Navy Seals,
+        and i've been involved in numerous secret raids on Al-Quaeda,
+        and all that other stuff.`,
+
+    `hmph, if i wasn't too lazy to animate myself leaving this spot, you'd be sorry!!`,
+
+    `oh... you think you're safe, do you?`,
+
+    `yeah, well guess what, bully, your ip is 127.0.0.1!`,
+
+    `and, your home address is PO Box 1524!`,
+
+    `hold on, you live in a PO box? i'm so sorry...`,
+
+    `please stop clicking me, otherwise...
+        i'll be forced to unleash my ultimate attack...`,
+
+    `i'm serious!! i'll really do it!!`,
+
+    `i'm warning you! back off!!`,
+
+    `last chance!! stop it or you'll be sorry!!`,
+
+    `lastest last chance!! for real!!`,
+
+    `this is the final last chance!! go away!!!`,
+
+    `i'm serious!! i even named it chance_FINAL_LAST_FINISHED_REAL_4.txt!`,
+
+    `okay... you leave me no choice. i'm sorry`
+];
+
+const luci = document.getElementById("pc-luci");
+const luciDialogueContainer = document.getElementById("pc-luci-dialogue-container");
+const luciDialogue = document.getElementById("pc-luci-dialogue");
+const luciDialogueText = document.getElementById("pc-luci-dialogue-text");
+let dialogueSizingText;
+
+const preloadPose = new Image();
+preloadPose.src = "assets/games/luci-pc-clicked.png";
+
+const preloadPose2 = new Image();
+preloadPose.src = "assets/games/luci-pc-annoyed.png";
+
+function luciClicked(event) {
+    luciClicks++;
+    if (luciClicks > 5) {
+        if (convoIndex == 0) { 
+            dialogueSizingText = luciDialogue.cloneNode(true);
+            dialogueSizingText.id = "";
+            dialogueSizingText.classList.add('hidden');
+            dialogueSizingText.setAttribute("aria-hidden", "true");
+            dialogueSizingText.tabIndex = -1;
+            dialogueSizingText.disabled = true;
+            dialogueSizingText.style.visibility = "hidden";
+            dialogueSizingText.style.pointerEvents = "none";
+            luciDialogueContainer.appendChild(dialogueSizingText);
+
+            luci.classList.add('annoyed');
+        }
+        
+        if (!rickRolled && convoIndex >= DIALOGUE.length) {
+            rickRolled = true
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
+
+        luciDialogue.style.maxWidth = `${dialogueSizingText.getBoundingClientRect().width}px`;
+        setDialogue(luciDialogueText, DIALOGUE[convoIndex]);
+        luciClicks = 0;
+        convoIndex++;
+    }
+}
+
+function setDialogue(container, text) {
+    container.replaceChildren();
+    const lines = text.split("\n");
+    lines.forEach((line, index) => {
+        container.append(line);
+        if (index < lines.length - 1) {
+            container.append(document.createElement('br'));
+        }
+    });
+}
+
+luci.addEventListener("mousedown", luciClicked);

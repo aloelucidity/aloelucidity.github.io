@@ -1,25 +1,28 @@
+        <audio id="luci-ow-sound" src="assets/sounds/luci-ow.mp3" preload="auto"></audio>
         <script type="module" src="typohunt.js" defer></script>
-
+        
         <div id="typo-modal" class="modal">
             <div class="typo-modal-content">
                 <h2>typo hunt!</h2>
-                <div class="typo-intro-text">
-                    <button id="pc-luci" class="pc-luci"></button>
-                    <p>
-                        oh dear... i wrote this page in quite a hurry, now i have so many typos to fix! :(<br>
-                        maybe you can help! i quite enjoy delegating labor that i should be doing myself >w0<br>
-                        <br>
-                        there should be... maybe 5 typos on this page. if you find one, click on it!<br>
-                        some of them will be inside dropdowns, so make sure you have them all expanded!<br>
-                        <br>
-                        i've included a little detector that will tell you whether a typo is on-screen.<br>
-                        your time is tracked, but there's no limit, so don't worry ^^<br>
-                        <br>
-                        anyways, these typos are really bugging me. mind helping a catboy out?
-                    </p>
+                <div id="pc-luci-dialogue-container" class="typo-intro-text">
+                    <div id="pc-luci-dialogue" class="pc-luci-dialogue">
+                        <button id="pc-luci" class="pc-luci"></button>
+                        <p id="pc-luci-dialogue-text" class="pc-luci-dialogue-text">
+                            oh dear... i wrote this page in quite a hurry, now i have so many typos to fix! :(<br>
+                            maybe you can help! i quite enjoy delegating labor that i should be doing myself >w0<br>
+                            <br>
+                            there should be... maybe 5 typos on this page. if you find one, click on it!<br>
+                            some of them will be inside dropdowns, so make sure you have them all expanded!<br>
+                            <br>
+                            i've included a little detector that will tell you whether a typo is on-screen.<br>
+                            your time is tracked, but there's no limit, so don't worry ^^<br>
+                            <br>
+                            anyways, these typos are really bugging me. mind helping a catboy out?
+                        </p>
+                    </div>
                 </div>
                 <div class="modal-top">
-                    <span id="typo-accept" class="close-button">sure!</span>
+                    <span id="typo-accept" class="accept-button">sure!</span>
                     <span id="typo-close" class="close-button">nah</span>
                 </div>
             </div>
