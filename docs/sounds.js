@@ -25,8 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
         updateToggleUI();
     });
 
-    function playSound(audioElement) {
+    function playSound(audioElement, semitoneShift = 0) {
         if (!soundEnabled) return;
+
+        const rate = Math.pow(2, semitoneShift / 12);
+        audioElement.preservesPitch = false;
+        audioElement.playbackRate = rate;
+
         audioElement.volume = 0.35;
         audioElement.currentTime = 0;
         audioElement.play().catch(() => {});
@@ -67,7 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const pcLuci = document.getElementById("pc-luci");
     if (pcLuci) {
         pcLuci.addEventListener('mousedown', () => {
-            playSound(luciOwSound);
+            const randomSemitones = (Math.random() * 4) - 2;
+            playSound(luciOwSound, randomSemitones);
         })
     }
 

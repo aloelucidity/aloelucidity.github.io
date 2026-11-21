@@ -1176,6 +1176,12 @@ img:active:not(.logo) {
         max-width: 30rem;
     }
 
+    .pc-luci:not(.clickable-luci) {
+        min-width: 0;
+        height: 12rem;
+        order: -1;
+    }
+
     /* Misc */
     #puzzle-board {
         width: 80vw;
