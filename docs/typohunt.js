@@ -33,11 +33,21 @@ const MONTHS_SHORT = [
   "jan.", "feb.", "mar.", "apr.", "may", "june",
   "july", "aug.", "sep.", "oct.", "nov.", "dec."
 ];
-function formatDate(date = new Date()) {
-  const month = MONTHS_SHORT[date.getMonth()];
-  const day = date.getDate();
-  const year = date.getFullYear();
+function formatDate(dayIndex = getLocalDayIndex()) {
+  const date = new Date(dayIndex * 86_400_000);
+  const month = MONTHS_SHORT[date.getUTCMonth()];
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
   return `${month} ${day} ${year}`;
+}
+
+function getLocalDayIndex(date = new Date()) {
+  const utcMidnight = Date.UTC(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+  return Math.floor(utcMidnight / 86_400_000);
 }
 
 function remToPx(rem) {
@@ -111,18 +121,42 @@ resultsCopyButton.onclick = () => {
     timers.set(resultsCopyText, timeoutId);
 }
 
-// the game . which you just LOST! mwahwahahaha im so evil
-
-let isWon = false;
+// storage
 
 let seed = getDailySeed();
 let rng = random(seed);
 let randomWord = WORDS[Math.floor(rng() * WORDS.length)];
 
+let isWon = false;
 let savedTimes = {};
 let finalTime = 0;
 let curStreak = 0;
-let startDate;
+let startDate = 0;
+let lastWonDay = Number(localStorage.getItem('typo_last_won_day'));
+
+if (lastWonDay < getLocalDayIndex() - 1) {
+    savedTimes = {};
+    curStreak = 0;
+    finalTime = 0;
+    localStorage.setItem('typo_saved_times', '{}')
+    localStorage.setItem('typo_cur_streak', 0);
+    localStorage.setItem('typo_final_time', 0);
+    localStorage.setItem('typo_start_date', 0);
+}
+else if (lastWonDay === getLocalDayIndex() - 1) {
+    curStreak = Number(localStorage.getItem('typo_cur_streak'));
+}
+else if (lastWonDay >= getLocalDayIndex()) {
+    savedTimes = JSON.parse(localStorage.getItem('typo_saved_times'));
+    curStreak = Number(localStorage.getItem('typo_cur_streak'));
+    finalTime = Number(localStorage.getItem('typo_final_time'));
+    startDate = Number(localStorage.getItem('typo_start_date'));
+    isWon = true;
+    updateResultsText();
+}
+
+
+// the game . which you just LOST! mwahwahahaha im so evil
 
 function updateHint() {
     const hintText = document.querySelector('.typo-hint');
@@ -171,7 +205,7 @@ function initGame() {
     const containers = document.querySelectorAll('.typo-text');
     const charElements = [];
     let globalIndex = 0;
-    startDate = new Date();
+    startDate = getLocalDayIndex();
 
     containers.forEach(container => {
         const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
@@ -267,7 +301,6 @@ function initGame() {
                 if (foundCount === 5) {
                     clearInterval(timerInterval);
                     finalTime = elapsedSeconds;
-                    curStreak++;
                     winGame();
                 }
             }
@@ -276,8 +309,19 @@ function initGame() {
 }
 
 function winGame() {
-    isWon = true;
+    if (isWon) {
+        return;
+    }
 
+    isWon = true;
+    curStreak++;
+
+    localStorage.setItem('typo_last_won_day', startDate);
+    localStorage.setItem('typo_saved_times', JSON.stringify(savedTimes));
+    localStorage.setItem('typo_cur_streak', curStreak);
+    localStorage.setItem('typo_final_time', finalTime);
+    localStorage.setItem('typo_start_date', startDate);
+    
     const mainTimerText = document.querySelector('.typo-timer');
     mainTimerText.textContent = `time - ${formatTime(finalTime)}`;
 
@@ -287,8 +331,20 @@ function winGame() {
     resultsModal.classList.add('active');
     typoTracker.classList.remove('active');
 
+    updateResultsText();
+
+    document.querySelectorAll('.typo-text.playing').forEach(c => c.classList.remove('playing'));
+}
+
+function updateResultsText() {
+    const resultsStreakText = document.getElementById('typo-results-streak');
+    const resultsDateText = document.getElementById('typo-results-date');
     const resultsTimerText = document.querySelector('.typo-results-timer');
     const resultsColumns = document.querySelectorAll('.typo-results-column');
+
+    const dayWord = curStreak === 1 ? "day" : "days";
+    resultsStreakText.textContent = `${curStreak} ${dayWord}`;
+    resultsDateText.textContent = formatDate(startDate);
     resultsTimerText.textContent = `total time - ${formatTime(finalTime)}`;
 
     for (let slotIndex = 0; slotIndex < 5; slotIndex++) {
@@ -301,8 +357,6 @@ function winGame() {
             if (timeDiv) timeDiv.textContent = formatTime(savedTimes[slotIndex]);
         }
     }
-
-    document.querySelectorAll('.typo-text.playing').forEach(c => c.classList.remove('playing'));
 }
 
 function spawnTypoAnimation(targetElement, typoChar) {
@@ -335,7 +389,7 @@ function getShareText(
   times,
   totalElapsedSeconds,
   streakDays,
-  date = new Date()
+  date = getLocalDayIndex()
 ) {
     const entries = Object.entries(times).map(([key, timeSeconds]) => ({
         slotIndex: Number(key),
@@ -366,8 +420,6 @@ function getShareText(
         "https://aloelucidity.com/games",
     ].join("\n");
 }
-
-// storage
 
 // bullying simulator
 

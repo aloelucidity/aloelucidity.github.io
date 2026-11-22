@@ -651,7 +651,7 @@ iframe {
     }
     100% {
         opacity: 0;
-        transform: translate(-50%, -125%) scale(9.0);
+        transform: translate(-50%, -125%) scale(6.0);
     }
 }
 
