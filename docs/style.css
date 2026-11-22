@@ -618,6 +618,43 @@ iframe {
     color: #27bf52;
 }
 
+.typo-pop {
+    position: fixed;
+    left: var(--pop-x, 0px);
+    top: var(--pop-y, 0px);
+    pointer-events: none;
+    z-index: 250;
+
+    font-family: var(--pop-font, inherit);
+    font-size: var(--pop-size, 1.25rem);
+    font-weight: bold;
+
+    color: white;
+    opacity: 1.0;
+
+    padding: 0.3rem;
+    -webkit-text-stroke: 0.3rem transparent;
+    
+    background-image: linear-gradient(in hsl longer hue 45deg, rgb(144, 16, 16) 0 100%);
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    transform: translate(-50%, -50%) scale(0.6);
+    animation: typo-pop 750ms ease-out forwards;
+}
+
+@keyframes typo-pop {
+    0% {
+        opacity: 1.0;
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -125%) scale(9.0);
+    }
+}
+
 .typo-text.playing {
     user-select: none;
     -webkit-user-select: none;
@@ -1048,6 +1085,75 @@ img:active:not(.logo) {
 
 .close-button, .accept-button {
     cursor: pointer;
+}
+
+.copy-button-text {
+    transform-origin: center;
+    pointer-events: none;
+    margin: 0;
+
+    /* Text */
+    color: white;
+    font-family: 'Fontdiner Swanky';
+    font-weight: 400;
+    font-size: 1.5rem;
+
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 
+
+    /* Outline */
+    -0.1rem -0.1rem 0 #3cc6a3,
+     0   -0.1rem 0 #3cc6a3,
+     0.1rem -0.1rem 0 #3cc6a3,
+     0.1rem  0   0 #3cc6a3,
+     0.1rem  0.1rem 0 #3cc6a3,
+     0    0.1rem 0 #3cc6a3,
+    -0.1rem  0.1rem 0 #3cc6a3,
+    -0.1rem  0   0 #3cc6a3,
+    /* Other */
+    0 0 1rem #298ba3, 0.2rem 0.25rem 0.05rem #7e77d4a0;
+
+    transition: text-shadow 0.3s ease, font-size 0.3s ease;
+}
+
+.accept-button:hover .copy-button-text {
+    text-shadow: 
+    /* Outline */
+    -0.1rem -0.1rem 0.2rem #3cc6a3,
+     0   -0.1rem 0.2rem #3cc6a3,
+     0.1rem -0.1rem 0.2rem #3cc6a3,
+     0.1rem  0   0.2rem #3cc6a3,
+     0.1rem  0.1rem 0.2rem #3cc6a3,
+     0    0.1rem 0.2rem #3cc6a3,
+    -0.1rem  0.1rem 0.2rem #3cc6a3,
+    -0.1rem  0   0.2rem #3cc6a3,
+    /* Other */
+    0 0 3rem #298ba3, 0.2rem 0.25rem 0.15rem #7e77d4a0;
+
+    font-size: 1.65rem;
+}
+
+.accept-button:active .copy-button-text {
+    font-size: 1.5rem;
+    color: #9cebb4;
+    transition: text-shadow 0.05s ease, font-size 0.05s ease;
+}
+
+.copy-button-text.copied {
+    animation: copy-flip 0.5s ease-out;
+}
+
+@keyframes copy-flip {
+    0% {
+        transform: perspective(600px) rotateX(0deg);
+    }
+    50% {
+        transform: perspective(600px) rotateX(180deg);
+    }
+    100% {
+        transform: perspective(600px) rotateX(360deg);
+    }
 }
 
 #puzzle-board {

@@ -56,6 +56,11 @@ const acceptButton = document.getElementById('typo-accept');
 const resultsModal = document.getElementById('typo-results-modal');
 const resultsCloseButton = document.getElementById('typo-results-close');
 const resultsCopyButton = document.getElementById('typo-results-copy');
+const resultsCopyText = document.getElementById('typo-results-copy-text');
+
+const timers = new WeakMap();
+const uncopiedText = "copy?";
+const copiedText = "copied!";
 
 const typoTracker = document.getElementById('typo-tracker');
 
@@ -82,12 +87,28 @@ resultsCloseButton.onclick = () => {
     typoStartButton.classList.remove('hidden');
 }
 resultsCopyButton.onclick = () => {
+    resultsCopyText.classList.remove('copied');
+    void resultsCopyText.offsetWidth;
+    resultsCopyText.textContent = copiedText;
+    resultsCopyText.classList.add('copied');
     navigator.clipboard.writeText(getShareText(
         savedTimes,
         finalTime,
         curStreak,
         startDate
     ));
+
+    if (timers.has(resultsCopyText)) {
+        clearTimeout(timers.get(resultsCopyText));
+    }
+
+    const timeoutId = setTimeout(() => {
+        resultsCopyText.textContent = uncopiedText;
+        resultsCopyText.classList.remove('copied');
+        timers.delete(resultsCopyText);
+    }, 1500);
+
+    timers.set(resultsCopyText, timeoutId);
 }
 
 // the game . which you just LOST! mwahwahahaha im so evil
@@ -241,6 +262,8 @@ function initGame() {
                 event.foundCount = foundCount;
                 window.dispatchEvent(event);
 
+                spawnTypoAnimation(this, scrambledChar);
+
                 if (foundCount === 5) {
                     clearInterval(timerInterval);
                     finalTime = elapsedSeconds;
@@ -280,6 +303,28 @@ function winGame() {
     }
 
     document.querySelectorAll('.typo-text.playing').forEach(c => c.classList.remove('playing'));
+}
+
+function spawnTypoAnimation(targetElement, typoChar) {
+    const rect = targetElement.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const computed = getComputedStyle(targetElement);
+
+    const fx = document.createElement('span');
+    fx.className = 'typo-pop';
+    fx.textContent = typoChar;
+
+    fx.style.setProperty('--pop-x', `${centerX}px`);
+    fx.style.setProperty('--pop-y', `${centerY}px`);
+    fx.style.setProperty('--pop-font', computed.fontFamily);
+    fx.style.setProperty('--pop-size', computed.fontSize);
+
+    fx.addEventListener('animationend', () => {
+        fx.remove();
+    }, { once: true });
+
+    document.body.appendChild(fx);
 }
 
 // sharing is caring

@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioElement.play().catch(() => {});
     }
 
-    document.querySelectorAll('a, button, img:not(.logo), .close-button, .nav-button, label').forEach(element => {
+    document.querySelectorAll('a, button, img:not(.logo), .close-button, .accept-button, .nav-button, label').forEach(element => {
         element.addEventListener('mouseenter', () => {
             playSound(hoverSound);
         });
